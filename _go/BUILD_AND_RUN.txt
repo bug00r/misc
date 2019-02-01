@@ -1,0 +1,6 @@
+goto go file like 
+
+cd ./projects/test/src
+go build test.go => test.exe
+go build => src.exe
+test.exe | src.exe 
