@@ -1,0 +1,41 @@
+export MAKE=mingw32-make
+export AR=ar
+export ARFLAGS=rcs
+export PATHSEP=/
+export CC=gcc
+export BUILDROOT=build
+
+ifeq ($(CLANG),1)
+	export CC=clang
+endif
+
+export BUILDDIR=$(BUILDROOT)$(PATHSEP)$(CC)
+export BUILDPATH=$(BUILDDIR)$(PATHSEP)
+
+ifeq ($(DEBUG),1)
+	export debug=-Ddebug=1
+	export isdebug=1
+endif
+
+ifeq ($(ANALYSIS),1)
+	export analysis=-Danalysis=1
+	export isanalysis=1
+endif
+
+ifeq ($(DEBUG),2)
+	export debug=-Ddebug=2
+	export isdebug=1
+endif
+
+ifeq ($(DEBUG),3)
+	export debug=-Ddebug=3
+	export isdebug=1
+endif
+
+ifeq ($(OUTPUT),1)
+	export outimg=-Doutput=1
+endif
+
+ifeq ($(RELEASE),1)
+	export release=-mwindows
+endif

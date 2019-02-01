@@ -1,0 +1,21 @@
+# How to test:
+#	test_boost.exe || inside execution add some numbers
+#
+#	test_boost2.exe < test_boost2.txt || will print out the subject
+#
+
+
+NAME:=test_boost
+
+all: clean bboost_test bboost_test2
+
+bboost_test:
+	g++ -o $(NAME).exe $(NAME).cpp -I./../_third/boost_1_66_0
+
+bboost_test2:
+	g++ -o $(NAME)2.exe $(NAME)2.cpp -I./../_third/boost_1_66_0 -L./../_third/boost_1_66_0/stage/lib -lboost_regex-mgw72-mt-x64-1_66
+	
+clean:
+	-rm $(NAME).o
+	-rm $(NAME).exe
+	-rm $(NAME)2.exe
