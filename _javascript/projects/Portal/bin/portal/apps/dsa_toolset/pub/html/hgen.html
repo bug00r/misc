@@ -1,0 +1,32 @@
+
+<div id="dsa-toolset-hgen-app">
+        <b-row no-gutters class="text-center">
+                <b-col cols="2">
+                        <b-card header-class="p-0"  no-body header-tag="header">
+                                <div slot="header">
+                                        <b>Heros</b>
+                                        <b-btn size="sm" v-b-modal="'newHeroModal'">+</b-btn>
+                                        <b-btn size="sm" >-</b-btn>
+                                </div>
+                                <b-list-group>
+                                        <b-list-group-item @click="selectSavedHero(hero)" v-for="hero in savedheros" href="#" class="m-0 p-0 flex-column align-items-start">
+                                                {{ hero.hero[0]._attr.description }}
+                                        </b-list-group-item>
+                                </b-list-group>
+                        </b-card>
+                </b-col>
+                <b-col >
+                        <div ref="herodetailsid"></div>
+                </b-col>
+        </b-row>   
+        <b-modal id="newHeroModal" ref="modal_new_hero" title="A Hero need a Name" @ok="handleAddNewHero" @shown="clearNewHeroModal">
+                <div class="text-danger">{{newHeroNameMsg}}</div>
+                <form @submit.stop.prevent="handleNewHeroSubmit">
+                        <b-form-input type="text"
+                                placeholder="Enter Name of Hero"
+                                v-model="newHeroName"></b-form-input>
+                </form>
+        </b-modal>     
+</div>
+
+<script type="application/javascript" src="portal/dsa_toolset/js/hgen.js"></script>

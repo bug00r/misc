@@ -1,0 +1,6 @@
+<root>
+	<el></el>
+	<el attr="bla">test</el>
+	<el></el>
+	<el attr="blubb"><test>test2</test></el>
+</root>

@@ -1,0 +1,10 @@
+{
+    "applications": {
+        "root": "apps",
+        "value": [
+            { "name": "DSA Toolset", "path": "dsa_toolset", "enabled": true },
+            { "name": "Application 2", "path": "app2", "enabled": true },
+            { "name": "Application 3", "path": "app3", "enabled": false }
+        ]
+    }
+}

@@ -1,0 +1,16 @@
+For some Use cases i found this plugins:
+
+Modals and Dialogs:             https://github.com/euvl/vue-js-modal
+Tooltips:                       https://github.com/Akryum/v-tooltip
+Layouting:                      https://github.com/jbaysolutions/vue-grid-layout
+Tables:                         https://github.com/ratiw/vuetable-2
+                                https://github.com/matfish2/vue-tables-2
+Popup-/Kontext Menu:            https://vmaimone.github.io/vue-context-menu/
+Menubar:                        https://github.com/michitaro/vue-menu (could replace popupmenue)
+
+
+Complete Frameworks:            [**]https://github.com/quasarframework/quasar
+                                [*]https://vuetifyjs.com/
+                                [***]http://element.eleme.io
+                                [**** => exp]https://bootstrap-vue.js.org
+

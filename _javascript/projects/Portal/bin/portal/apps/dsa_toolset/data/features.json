@@ -1,0 +1,7 @@
+{
+    "features": [
+        { "name": "DSA Toolset - Hero Generator", "icon":"hgen.png", "ui":"hgen.html", "uiid": "hgencenter","enabled": true},
+        { "name": "DSA Toolset - Map Generator", "icon":"mapgen.png", "ui":"mapgen.html", "uiid": "mapgencenter", "enabled": true },
+        { "name": "DSA Toolset - Dungeon Generator", "icon":"dungeongen.png", "ui":"dungeongen.html", "uiid": "dungeongencenter","enabled": true}
+    ]
+}

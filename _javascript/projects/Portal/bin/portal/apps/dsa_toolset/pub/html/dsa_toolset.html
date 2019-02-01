@@ -1,0 +1,16 @@
+
+<div id="dsa-toolset-app">
+        <b-card no-body>
+                <b-tabs nav-class="m-0 p-0" pills card vertical small card>
+                  <b-tab v-for="feature in features" :disabled="!feature.enabled" >
+                        <template slot="title">
+                                <b-img @click="activateFeature(event, feature)" center width="32" height="32" :src="getThumb(feature.icon)" alt="center image" :title="feature.name" />
+                        </template>
+                        <div :ref="feature.uiid"></div>             
+                  </b-tab>
+                </b-tabs>
+        </b-card>
+</div>
+
+<script type="application/javascript" src="portal/dsa_toolset/js/SaxonJS/SaxonJS.js"></script>
+<script type="application/javascript" src="portal/dsa_toolset/js/start.js"></script>

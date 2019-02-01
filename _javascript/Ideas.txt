@@ -1,0 +1,69 @@
+Standalone JS App.
+------------------
+Requirements:
+	- App should work without Server only local html files
+	- All needed Data are included in the HTML Page Context. This can be inside Script Tag with type="test/xml" or anything else.
+	  Another Way is including large Files inside Javascript(don't know how to work with binary data)
+	- Downloads from HTML-Page can be done with: https://ourcodeworld.com/articles/read/189/how-to-create-a-file-and-generate-a-download-with-javascript-in-the-browser-without-a-server
+		--- Code ---
+			function download(filename, text) {
+			  var element = document.createElement('a');
+			  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+			  element.setAttribute('download', filename);
+
+			  element.style.display = 'none';
+			  document.body.appendChild(element);
+
+			  element.click();
+
+			  document.body.removeChild(element);
+			}
+
+			// Start file download.
+			download("hello.txt","This is the content of my file :)");
+		--- Code ---
+	    
+		For this we can use different kind of data uri Scheme: https://en.wikipedia.org/wiki/Data_URI_scheme
+	
+	- Other Libs we can find here: https://github.com/sorrycc/awesome-javascript#data-visualization
+	- For an easier build and workflow process we could use make and node js or only node js
+
+
+Current:
+nodejs
+	- express (installed)
+	- we will change from xml to JSON and using => https://www.npmjs.com/package/jsonpath-plus	(installed)
+	- if we want to use FOP we need to convert JS to XML with => https://www.npmjs.com/package/xml (installed)
+
+
+Hint:
+- for web sockets => https://www.npmjs.com/package/express-ws
+- configuration for VSCode => https://code.visualstudio.com/docs/nodejs/nodejs-debugging
+
+C/C++ Extensions possible:
+								 https://www.npmjs.com/package/node-gyp
+
+
+### PREFFERED USE RUST ####
+
+TODOS OR CHECK: 
+			Installation:
+					here you found: https://www.hellorust.com/setup/wasm-target/
+						- cargo install wasm-bindgen-cli
+						- cargo install --git https://github.com/alexcrichton/wasm-gc
+
+
+Rust extensions: https://blog.risingstack.com/node-js-native-modules-with-rust/
+								 https://guides.neon-bindings.com/getting-started/
+								 https://hacks.mozilla.org/2018/04/javascript-to-rust-and-back-again-a-wasm-bindgen-tale/
+
+
+Loading webassembly inside Webside JS:
+				https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WebAssembly/instantiate
+
+
+### PREFFERED USE RUST ####
+
+
+Webassemlby SDK: I REMOVED THE EMSDK BECAUSE ITS TO LARGE AND ITS BETTER USING RUST
+								https://kripken.github.io/emscripten-site/docs/getting_started/downloads.html
