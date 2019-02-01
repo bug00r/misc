@@ -1,0 +1,12 @@
+{
+	"name": "dlang_rust",
+	"authors": [
+		"bug"
+	],
+	"description": "A minimal D application.",
+	"copyright": "Copyright © 2018, bug",
+	"license": "proprietary",
+    "libs": [
+		"py_render_lib.dll"
+	]
+}

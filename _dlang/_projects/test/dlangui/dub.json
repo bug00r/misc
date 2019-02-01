@@ -1,0 +1,12 @@
+{
+	"name": "dlanui_test",
+	"authors": [
+		"bug"
+	],
+	"dependencies": {
+		"dlangui": "~>0.9.176"
+	},
+	"description": "A minimal D application.",
+	"copyright": "Copyright © 2018, bug",
+	"license": "proprietary"
+}
