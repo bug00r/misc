@@ -1,0 +1,14 @@
+.dub
+docs.json
+__dummy.html
+docs/
+dlanui_test.so
+dlanui_test.dylib
+dlanui_test.dll
+dlanui_test.a
+dlanui_test.lib
+dlanui_test-test-*
+*.exe
+*.o
+*.obj
+*.lst
