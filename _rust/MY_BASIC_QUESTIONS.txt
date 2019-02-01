@@ -1,0 +1,61 @@
+Q: Ho i can reduce Rust binary Size.
+A: easytoml edit for release and usage strip commad from MSYS2 against binary
+	Cargo.toml:
+		[profile.release]
+		lto = true
+		panic = 'abort'
+   - explanation => https://lifthrasiir.github.io/rustlog/why-is-a-rust-executable-large.html
+
+Q: Can i pass primitives as Reference and when, how?
+A: 1. let var: f32 = 23; myfunc(&var); // reference
+   2. myfunc(&23); // reference
+
+Q: How can i realize arrays 
+A: 1. You have to use Vec<T>
+   2. but you can allocalte like in C and cast to Array or Slice
+	  (help: https://doc.rust-lang.org/1.15.0/std/primitive.pointer.html)
+	  
+
+Q: How to print during test
+A: cargo test -- --nocapture
+
+Q: How i can conditional compilation like #define foo in C
+A: https://doc.rust-lang.org/book/first-edition/conditional-compilation.html
+
+	in Cargo.toml
+		add section [features] and then as example "foo = []"
+		
+		Result:
+			[features]
+			foo = [] # no dependencies
+			
+	calling from cargo:
+	
+	cargo build --features "foo"
+	cargo test --features "foo"
+	
+	in code:
+	
+	if cfg!(feature = "foo") {
+		println!("Think Different!");
+	}
+	
+Q: How To fill an Vec with given Capacity on an easy Way
+A:	extern crate libc;
+	use std::mem;
+
+	fn main() {
+		let mut buffer: Vec<u32> = vec![42; 20];
+		println!("{:?}", buffer);
+
+		// overwrite the buffer with all zeros
+		unsafe {
+			libc::memset(
+				buffer.as_mut_ptr() as _,
+				0,
+				buffer.len() * mem::size_of::<u32>(),
+			);
+		}
+		println!("{:?}", buffer);
+	}
+	
