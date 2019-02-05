@@ -3,6 +3,8 @@
 **/*.obj
 **/*.lib
 **/*.dll
+**/*.7z
+**/*.zip
 **/build/
 **/_third*
 **/.idea
@@ -15,9 +17,9 @@
 npp_workspace.txt
 _python/Python*
 /_dlang/_projects/dlangui-master
-/_dlang/dmd2
+/_dlang/dmd2*
 /_dlang/gdc-6.3
-/_dlang/ldc2-1.8.0
+/_dlang/ldc2*
 /_doc/
 /_go/go/
 /_java/maven-repo/
