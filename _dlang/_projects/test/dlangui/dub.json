@@ -4,7 +4,7 @@
 		"bug"
 	],
 	"dependencies": {
-		"dlangui": "~>0.9.176"
+		"dlangui": "0.9.182"
 	},
 	"description": "A minimal D application.",
 	"copyright": "Copyright © 2018, bug",
