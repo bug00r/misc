@@ -17,7 +17,6 @@
 /_rust/cargo_home
 /_rust/rust
 /_rust/**/target/
-npp_workspace.txt
 _python/Python*
 /_dlang/_projects/dlangui-master
 /_dlang/dmd2*

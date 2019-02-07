@@ -1,0 +1,129 @@
+<NotepadPlus>
+    <Project name="c" />
+    <Project name="rust">
+        <Folder name="_learn_">
+            <Folder name="FFI_C">
+                <Folder name="test_001">
+                    <Folder name="src">
+                        <File name="_rust\_learn_\FFI_C\test_001\src\lib.rs" />
+                    </Folder>
+                    <File name="_rust\_learn_\FFI_C\test_001\Cargo.lock" />
+                    <File name="_rust\_learn_\FFI_C\test_001\Cargo.toml" />
+                    <File name="_rust\_learn_\FFI_C\test_001\main.c" />
+                    <File name="_rust\_learn_\FFI_C\test_001\Makefile" />
+                    <File name="_rust\_learn_\FFI_C\test_001\test_ffi.exe" />
+                </Folder>
+            </Folder>
+            <Folder name="guessing_game">
+                <Folder name="src">
+                    <File name="_rust\_learn_\guessing_game\src\main.rs" />
+                </Folder>
+                <File name="_rust\_learn_\guessing_game\.gitignore" />
+                <File name="_rust\_learn_\guessing_game\Cargo.lock" />
+                <File name="_rust\_learn_\guessing_game\Cargo.toml" />
+            </Folder>
+            <Folder name="hello_world">
+                <Folder name="src">
+                    <File name="_rust\_learn_\hello_world\src\main.rs" />
+                </Folder>
+                <File name="_rust\_learn_\hello_world\.gitignore" />
+                <File name="_rust\_learn_\hello_world\Cargo.lock" />
+                <File name="_rust\_learn_\hello_world\Cargo.toml" />
+            </Folder>
+            <Folder name="lifetime">
+                <Folder name="src">
+                    <File name="_rust\_learn_\lifetime\src\main.rs" />
+                </Folder>
+                <File name="_rust\_learn_\lifetime\.gitignore" />
+                <File name="_rust\_learn_\lifetime\Cargo.lock" />
+                <File name="_rust\_learn_\lifetime\Cargo.toml" />
+            </Folder>
+        </Folder>
+        <Folder name="lib">
+            <Folder name="math">
+                <Folder name="src">
+                    <Folder name="algorithm">
+                        <Folder name="fractals">
+                            <File name="_rust\project\math\src\algorithm\fractals\julia.rs" />
+                            <File name="_rust\project\math\src\algorithm\fractals\julia_test.rs" />
+                            <File name="_rust\project\math\src\algorithm\fractals\mandelbrot.rs" />
+                            <File name="_rust\project\math\src\algorithm\fractals\mandelbrot_test.rs" />
+                            <File name="_rust\project\math\src\algorithm\fractals\mod.rs" />
+                        </Folder>
+                        <Folder name="noise">
+                            <File name="_rust\project\math\src\algorithm\noise\core.rs" />
+                            <File name="_rust\project\math\src\algorithm\noise\ds.rs" />
+                            <File name="_rust\project\math\src\algorithm\noise\ds_test.rs" />
+                            <File name="_rust\project\math\src\algorithm\noise\md.rs" />
+                            <File name="_rust\project\math\src\algorithm\noise\md_test.rs" />
+                            <File name="_rust\project\math\src\algorithm\noise\mod.rs" />
+                        </Folder>
+                        <File name="_rust\project\math\src\algorithm\mod.rs" />
+                    </Folder>
+                    <Folder name="mat">
+                        <File name="_rust\project\math\src\mat\mat2.rs" />
+                        <File name="_rust\project\math\src\mat\mat2_test.rs" />
+                        <File name="_rust\project\math\src\mat\mat3.rs" />
+                        <File name="_rust\project\math\src\mat\mat3_test.rs" />
+                        <File name="_rust\project\math\src\mat\mat4.rs" />
+                        <File name="_rust\project\math\src\mat\mat4_test.rs" />
+                        <File name="_rust\project\math\src\mat\mod.rs" />
+                    </Folder>
+                    <Folder name="statistics">
+                        <File name="_rust\project\math\src\statistics\average.rs" />
+                        <File name="_rust\project\math\src\statistics\mod.rs" />
+                    </Folder>
+                    <Folder name="utils">
+                        <File name="_rust\project\math\src\utils\mod.rs" />
+                        <File name="_rust\project\math\src\utils\utils_test.rs" />
+                    </Folder>
+                    <Folder name="vec">
+                        <File name="_rust\project\math\src\vec\mod.rs" />
+                        <File name="_rust\project\math\src\vec\vec2.rs" />
+                        <File name="_rust\project\math\src\vec\vec2_test.rs" />
+                        <File name="_rust\project\math\src\vec\vec3.rs" />
+                        <File name="_rust\project\math\src\vec\vec3_test.rs" />
+                    </Folder>
+                    <File name="_rust\project\math\src\lib.rs" />
+                </Folder>
+                <File name="_rust\project\math\Cargo.lock" />
+                <File name="_rust\project\math\Cargo.toml" />
+            </Folder>
+            <Folder name="renderer">
+                <Folder name="src">
+                    <Folder name="color">
+                        <File name="_rust\project\renderer\src\color\color_test.rs" />
+                        <File name="_rust\project\renderer\src\color\mod.rs" />
+                    </Folder>
+                    <Folder name="objects">
+                        <File name="_rust\project\renderer\src\objects\mesh.rs" />
+                        <File name="_rust\project\renderer\src\objects\mod.rs" />
+                        <File name="_rust\project\renderer\src\objects\scene.rs" />
+                        <File name="_rust\project\renderer\src\objects\shape.rs" />
+                        <File name="_rust\project\renderer\src\objects\shape_test.rs" />
+                    </Folder>
+                    <Folder name="texture">
+                        <Folder name="converter">
+                            <File name="_rust\project\renderer\src\texture\converter\julia.rs" />
+                            <File name="_rust\project\renderer\src\texture\converter\mandelbrot.rs" />
+                            <File name="_rust\project\renderer\src\texture\converter\mod.rs" />
+                            <File name="_rust\project\renderer\src\texture\converter\noise.rs" />
+                        </Folder>
+                        <Folder name="filter">
+                            <File name="_rust\project\renderer\src\texture\filter\mod.rs" />
+                        </Folder>
+                        <File name="_rust\project\renderer\src\texture\mod.rs" />
+                        <File name="_rust\project\renderer\src\texture\texture_test.rs" />
+                    </Folder>
+                    <File name="_rust\project\renderer\src\camera.rs" />
+                    <File name="_rust\project\renderer\src\lib.rs" />
+                    <File name="_rust\project\renderer\src\rasterizer.rs" />
+                    <File name="_rust\project\renderer\src\raterizer_test.rs" />
+                </Folder>
+                <File name="_rust\project\renderer\.gitignore" />
+                <File name="_rust\project\renderer\Cargo.lock" />
+                <File name="_rust\project\renderer\Cargo.toml" />
+            </Folder>
+        </Folder>
+    </Project>
+</NotepadPlus>
