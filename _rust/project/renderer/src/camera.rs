@@ -148,8 +148,8 @@ impl Camera {
 		self.set_viewport(l,r,t,b,n,f);
 		self.look_at_ortho(from, to);
 		self.to_projection_ortho();
-		self.transformation.set_from(&self.view);
-		self.transformation *= &self.projection;
+		self.transformation.set_from(&self.projection);
+		self.transformation *= &self.view;
 	}
 	
 	/*
@@ -157,6 +157,7 @@ impl Camera {
 		Reason for tryout performance boost is a fps depend camera rotation
 	*/
 	pub fn look_at_perspective(&mut self, from: &Vec3, to: &Vec3) {
+	
 		self.forward.set_from(from);
 		self.forward -= to;
 		self.forward.normalize();
@@ -261,6 +262,7 @@ impl Camera {
 			self.view._31 *= det; self.view._32 *= det; self.view._33 *= det; self.view._34 *= det;
 			self.view._41 *= det; self.view._42 *= det; self.view._43 *= det; self.view._44 *= det;
 		}
+		
 	}
 	
 	//scratch a pixel projection => right hand Matrix in use like directX
@@ -289,7 +291,7 @@ impl Camera {
 	
 	// open GL projection
 	pub fn to_projection_perspective(&mut self) {
-		let scale: f32 = 1.0 / (90.0 * 0.5 * PI / 180.0).tan(); 
+		let scale: f32 = 1.0 as f32 / (90.0 as f32 * 0.5 as f32 * PI / 180.0 as f32).tan(); 
 		self.projection._11 = scale;//(2.0*self.n)/(self.r-self.l);//scale;//
 		self.projection._12 = 0.0;
 		self.projection._13 = (self.r+self.l)/(self.r-self.l);
@@ -314,9 +316,9 @@ impl Camera {
 	pub fn to_perspective(&mut self, from: &Vec3, to: &Vec3, l: f32, r: f32, t: f32, b: f32, n: f32, f: f32) {
 		self.set_viewport(l,r,t,b,n,f);
 		self.look_at_perspective(from, to);
-		self.to_projection_perspective_();
-		self.transformation.set_from(&self.view);
-		self.transformation *= &self.projection;
+		self.to_projection_perspective();
+		self.transformation.set_from(&self.projection);
+		self.transformation *= &self.view;
 	}
 	
 }

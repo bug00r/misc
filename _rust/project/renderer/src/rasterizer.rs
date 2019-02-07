@@ -13,12 +13,12 @@ use std::io::Write;
 use std::fs::File;   
 
 pub struct Renderer {
-	pub img_width: u32,
-	pub img_height: u32,
+	pub img_width: i32,
+	pub img_height: i32,
 	pub img_width_half: f32,
 	pub img_height_half: f32,
-	pub buf_width : u32,
-	pub buf_height: u32,
+	pub buf_width : i32,
+	pub buf_height: i32,
 	pub camera: Camera,
 	pub samplestep: u32,
 	pub used_samples: u32,
@@ -34,10 +34,10 @@ pub struct Renderer {
 
 impl Renderer {
 
-	pub fn new(img_width: u32, img_height: u32, bgcolor: &Color, samplestep: u32) -> Renderer {
+	pub fn new(img_width: i32, img_height: i32, bgcolor: &Color, samplestep: u32) -> Renderer {
 		let us: u32 = samplestep * samplestep;
-		let bw: u32 = img_width * us;
-		let buffersize: usize = (img_width * img_height * us) as usize;
+		let bw: u32 = img_width as u32 * us;
+		let buffersize: usize = (img_width * img_height * us as i32) as usize;
 		
 		let mut renderer = Renderer {
 			camera: Camera::new(),
@@ -46,7 +46,7 @@ impl Renderer {
 			img_width, img_height,
 			img_width_half: img_width as f32 * 0.5,
 			img_height_half: img_height as f32 * 0.5,
-			buf_width : bw,
+			buf_width : bw as i32,
 			buf_height: img_height,
 			samplestep,
 			frame_buffer: Vec::with_capacity(buffersize),
@@ -88,7 +88,7 @@ impl Renderer {
 	
 
 	fn _compute_px_color( &self, color: &mut Color, bc: &Barycentric, weight1: &f32 , weight2: &f32 , weight3: &f32 ,
-						  img_w: &u32, v1c: &Color, v2c: &Color, v3c: &Color,
+						  img_w: &i32, v1c: &Color, v2c: &Color, v3c: &Color,
 						  v1t: &Vec2, v2t: &Vec2, v3t: &Vec2, tex_id: &i32 ) {
 	
 		let z0:f32  = bc.bc0*(*weight1);
@@ -213,7 +213,7 @@ impl Renderer {
 	}
 	
 	fn _compute_sample_and_check_point(cur_w: &mut u32, cur_h: &mut u32,
-									   img_w: &u32, img_h: &u32, p_raster1: &Vec3) -> bool {
+									   img_w: &i32, img_h: &i32, p_raster1: &Vec3) -> bool {
 						
 		if (p_raster1.x >= 0.0) &&
 			 (p_raster1.x <= *img_w as f32) &&
@@ -228,10 +228,10 @@ impl Renderer {
 	}
 
 	fn _compute_min_max_w_h(maxx: &mut u32, maxy: &mut u32, minx: &mut u32,miny: &mut u32,
-							cur_w: &mut u32, cur_h: &mut u32, img_w: &u32, img_h: &u32,
+							cur_w: &mut u32, cur_h: &mut u32, img_w: &i32, img_h: &i32,
 							p_raster1: &Vec3, p_raster2: &Vec3,p_raster3: &Vec3) {
-		*maxx = (*img_w).min((p_raster1.x as u32).max((p_raster2.x as u32).max(p_raster3.x as u32)));
-		*maxy = (*img_h).min((p_raster1.y as u32).max((p_raster2.y as u32).max(p_raster3.y as u32)));
+		*maxx = (*img_w as u32).min((p_raster1.x as u32).max((p_raster2.x as u32).max(p_raster3.x as u32)));
+		*maxy = (*img_h as u32).min((p_raster1.y as u32).max((p_raster2.y as u32).max(p_raster3.y as u32)));
 		*minx = (0 as u32).max((p_raster1.x as u32).min((p_raster2.x as u32).min(p_raster3.x as u32)));
 		*miny = (0 as u32).max((p_raster1.y as u32).min((p_raster2.y as u32).min(p_raster3.y as u32)));
 		*cur_h = *miny;
@@ -239,11 +239,11 @@ impl Renderer {
 	}
 	
 	fn _compute_min_max_w_h_line(maxx: &mut u32, maxy: &mut u32, minx: &mut u32,miny: &mut u32,
-								 cur_w: &mut u32, cur_h: &mut u32, img_w: &u32, img_h: &u32,
+								 cur_w: &mut u32, cur_h: &mut u32, img_w: &i32, img_h: &i32,
 								 p_raster1: &Vec3, p_raster2: &Vec3) {
 								 
-		*maxx = (*img_w).min((p_raster1.x as u32).max(p_raster2.x as u32));
-		*maxy = (*img_h).min((p_raster1.y as u32).max(p_raster2.y as u32));
+		*maxx = (*img_w as u32).min((p_raster1.x as u32).max(p_raster2.x as u32));
+		*maxy = (*img_h as u32).min((p_raster1.y as u32).max(p_raster2.y as u32));
 		*minx = (0 as u32).max((p_raster1.x as u32).min(p_raster2.x as u32));
 		*miny = (0 as u32).max((p_raster1.y as u32).min(p_raster2.y as u32));
 		*cur_h = *miny;
@@ -299,7 +299,7 @@ impl Renderer {
 					if Renderer::_compute_sample_and_check_point(
 									&mut cur_w, &mut cur_h, &self.img_width, &self.img_height, &p_raster1) { continue; }
 					
-					let bi: u32 = cur_h * self.buf_width + (cur_w * used_samples) + sample as u32;		
+					let bi: u32 = cur_h * self.buf_width  as u32 + (cur_w * used_samples) + sample as u32;		
 					
 					if self._compute_and_set_z_point(&rz1, &bi) { continue; }
 					
@@ -357,7 +357,7 @@ impl Renderer {
 		
 		while cur_h < maxy {
 			let mut cur_w: u32 = minx;
-			let cur_hbuf_width: u32 = cur_h * self.buf_width;;
+			let cur_hbuf_width: u32 = cur_h * self.buf_width as u32;
 			while cur_w < maxx {				
 				let cur_wused_samples: u32 = cur_hbuf_width + (cur_w * self.used_samples);
 				for sample in 0..self.used_samples {
@@ -511,7 +511,7 @@ impl Renderer {
 		
 		while cur_h < maxy {
 			let mut cur_w: u32 = minx;
-			let cur_hbuf_width: u32 = cur_h * self.buf_width;;
+			let cur_hbuf_width: u32 = cur_h * self.buf_width as u32;
 			while cur_w < maxx {				
 				let cur_wused_samples: u32 = cur_hbuf_width + (cur_w * self.used_samples);
 				for sample in 0..self.used_samples {
@@ -561,7 +561,7 @@ impl Renderer {
 	}	
 	
 	pub fn clear_frame(&mut self) {
-		let buffersize: usize = (self.img_width * self.img_height * self.samplestep * self.samplestep) as usize;
+		let buffersize: usize = (self.img_width as u32 * self.img_height as u32 * self.samplestep * self.samplestep) as usize;
 		for i in 0..buffersize {
 			self.z_buffer[i] = std::f32::MAX;
 			self.frame_buffer[i].set_from_color(&BLACK);
@@ -580,7 +580,7 @@ impl Renderer {
 			for i in 0..self.img_width {
 				fc.set_from_rgb(0.0, 0.0, 0.0);
 
-				let samplestart: usize = bi + (i * self.used_samples) as usize;
+				let samplestart: usize = bi + (i as u32 * self.used_samples) as usize;
 				for sample in 0..self.used_samples{
 					let c: &Color = &self.frame_buffer[samplestart + sample as usize];
 					fc.r += c.r;
@@ -604,7 +604,7 @@ impl Renderer {
 			for i in 0..self.img_width {
 				_color = 0.0;
 
-				let samplestart: usize = bi + (i * self.used_samples) as usize;
+				let samplestart: usize = bi + (i as u32 * self.used_samples) as usize;
 				for sample in 0..self.used_samples{
 					_color += &self.z_buffer[samplestart + sample as usize];
 				}

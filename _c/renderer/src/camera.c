@@ -88,6 +88,7 @@ camera_lookAt_ortho(camera_t *  camera, const vec3_t *  from, const vec3_t *  to
 
 void 
 camera_lookAt_perspective(camera_t *  camera, const vec3_t *  from, const vec3_t *  to) {
+	
 	const vec3_t *  eye = from;
 	camera_t *  cam = camera;
 	vec3_t * f = &cam->forward;

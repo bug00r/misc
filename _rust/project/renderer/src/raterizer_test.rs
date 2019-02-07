@@ -6,7 +6,7 @@ use objects::mesh::*;
 use objects::scene::*;
 use objects::shape::*;
 
-fn create_renderer(	width: u32, height: u32,
+fn create_renderer(	width: i32, height: i32,
 					from: &Vec3, to: &Vec3, 
 					zoom: f32, 
 					left: f32,right: f32, 
@@ -27,12 +27,12 @@ fn create_test_base_renderer(samplestep: u32) -> Renderer {
 					0.5 /* zoom */,
 					-2.0 /* left */, 2.0 /*right*/, 
 					2.0 /* top */, -2.0 /*bottom*/, 
-					1.0 /* near */, 100.0 /*far*/,
+					1.0 /* near */, 5.0 /*far*/,
 					&BLACK,
 					samplestep)
 }
 
-fn create_renderer_perspective(	width: u32, height: u32,
+fn create_renderer_perspective(	width: i32, height: i32,
 					from: &Vec3, to: &Vec3, 
 					zoom: f32, 
 					left: f32,right: f32, 
@@ -46,7 +46,7 @@ fn create_renderer_perspective(	width: u32, height: u32,
 }
 
 fn create_test_base_renderer_perspective(samplestep: u32) -> Renderer {
-	let from: Vec3 = Vec3::new(0.0, 0.0, 2.0);
+	let from: Vec3 = Vec3::new(0.0, 0.0, 2.5);
 	let to: Vec3 = Vec3::new_empty();
 	create_renderer_perspective(512 /*width*/, 512/*height*/,
 					&from, &to, 
@@ -369,9 +369,9 @@ fn test_render_triangle_orthogonal_msaa4x4() {
 #[cfg(any(feature = "all", all(feature = "triangle", feature = "perspective", feature = "nomsaa")))]
 fn test_render_triangle_perspective_nomsaa() {
 	
-	let p1: Vec3 = Vec3{x: -0.75, y: -0.75, z: 1.55 };
-	let p2: Vec3 = Vec3{x: 0.75,  y: -0.75, z: 1.55 };
-	let p3: Vec3 = Vec3{x: 0.05,  y: 0.75,  z: 3.05 };
+	let p1: Vec3 = Vec3{x: -0.75, y: -0.75, z: 0.55 };
+	let p2: Vec3 = Vec3{x: 0.75,  y: -0.55, z: 0.25 };
+	let p3: Vec3 = Vec3{x: 0.05,  y: 0.75,  z: -0.75 };
 	let mut triangle: Mesh = MeshBuilder::triangle(&p1, &p2, &p3);
 	
 	let mut renderer: Renderer = create_test_base_renderer_perspective(1);
