@@ -1,5 +1,62 @@
 <NotepadPlus>
-    <Project name="c" />
+    <Project name="c">
+        <Folder name="renderer">
+            <Folder name="include">
+                <File name="_c\renderer\include\camera.h" />
+                <File name="_c\renderer\include\renderer.h" />
+            </Folder>
+            <Folder name="src">
+                <File name="_c\renderer\src\camera.c" />
+                <File name="_c\renderer\src\renderer.c" />
+            </Folder>
+            <Folder name="test">
+                <File name="_c\renderer\test\test_include_add_bkgrnd.c" />
+                <File name="_c\renderer\test\test_include_cone.c" />
+                <File name="_c\renderer\test\test_include_cube.c" />
+                <File name="_c\renderer\test\test_include_cylinder.c" />
+                <File name="_c\renderer\test\test_include_lines.c" />
+                <File name="_c\renderer\test\test_include_points.c" />
+                <File name="_c\renderer\test\test_include_quad.c" />
+                <File name="_c\renderer\test\test_include_renderer.c" />
+                <File name="_c\renderer\test\test_include_renderer_creation.c" />
+                <File name="_c\renderer\test\test_include_samples.c" />
+                <File name="_c\renderer\test\test_include_sphere.c" />
+                <File name="_c\renderer\test\test_include_square_block.c" />
+                <File name="_c\renderer\test\test_include_test_scene.c" />
+                <File name="_c\renderer\test\test_include_texture_cube.c" />
+                <File name="_c\renderer\test\test_include_triangle.c" />
+                <File name="_c\renderer\test\test_renderer.c" />
+            </Folder>
+            <File name="_c\renderer\Makefile" />
+            <File name="_c\renderer\README.txt" />
+            <File name="_c\renderer\_DO_NOT_DELETE__renderer_V0_bkup.7z" />
+            <File name="_c\renderer\_DO_NOT_DELETE__renderer_V1_bkup.7z" />
+        </Folder>
+        <Folder name="tetris">
+            <File name="_c\tetris\main.c" />
+            <File name="_c\tetris\Makefile" />
+            <File name="_c\tetris\test_tetris.c" />
+            <File name="_c\tetris\tetris.c" />
+            <File name="_c\tetris\tetris.h" />
+            <File name="_c\tetris\tetris_app.c" />
+            <File name="_c\tetris\tetris_app.h" />
+            <File name="_c\tetris\tetris_defs.h" />
+            <File name="_c\tetris\tetris_game.c" />
+            <File name="_c\tetris\tetris_game.h" />
+            <File name="_c\tetris\tetris_gfx.c" />
+            <File name="_c\tetris\tetris_gfx.h" />
+            <File name="_c\tetris\tetris_input.c" />
+            <File name="_c\tetris\tetris_input.h" />
+            <File name="_c\tetris\tetris_sfx.c" />
+            <File name="_c\tetris\tetris_sfx.h" />
+            <File name="_c\tetris\tetris_ui.c" />
+            <File name="_c\tetris\tetris_ui.h" />
+            <File name="_c\tetris\texture1 - Kopie.png" />
+            <File name="_c\tetris\texture1.png" />
+            <File name="_c\tetris\texture1.xcf" />
+            <File name="_c\tetris\_TODO_LIST.txt" />
+        </Folder>
+    </Project>
     <Project name="rust">
         <Folder name="_learn_">
             <Folder name="FFI_C">
@@ -37,6 +94,13 @@
                 <File name="_rust\_learn_\lifetime\.gitignore" />
                 <File name="_rust\_learn_\lifetime\Cargo.lock" />
                 <File name="_rust\_learn_\lifetime\Cargo.toml" />
+            </Folder>
+            <Folder name="add_blobb">
+                <Folder name="src">
+                    <File name="_rust\_learn_\add_blob\src\main.rs" />
+                    <File name="_rust\_learn_\add_blob\src\text.in" />
+                </Folder>
+                <File name="_rust\_learn_\add_blob\Cargo.toml" />
             </Folder>
         </Folder>
         <Folder name="lib">
@@ -125,5 +189,7 @@
                 <File name="_rust\project\renderer\Cargo.toml" />
             </Folder>
         </Folder>
+        <File name="_rust\MY_BASIC_QUESTIONS.txt" />
+        <File name="_rust\README_INSTALL.txt" />
     </Project>
 </NotepadPlus>
