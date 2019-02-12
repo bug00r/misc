@@ -56,6 +56,49 @@
             <File name="_c\tetris\texture1.xcf" />
             <File name="_c\tetris\_TODO_LIST.txt" />
         </Folder>
+        <Folder name="renderer_ui_iup">
+            <Folder name="src">
+                <File name="_c\renderer_ui_iup\src\app.c" />
+                <File name="_c\renderer_ui_iup\src\app.h" />
+                <File name="_c\renderer_ui_iup\src\iup_app.c" />
+                <File name="_c\renderer_ui_iup\src\iup_app.h" />
+                <File name="_c\renderer_ui_iup\src\plugin.c" />
+                <File name="_c\renderer_ui_iup\src\plugin.h" />
+                <File name="_c\renderer_ui_iup\src\plugin_ui_main.c" />
+                <File name="_c\renderer_ui_iup\src\plugin_ui_main.h" />
+                <File name="_c\renderer_ui_iup\src\plugin_ui_renderer - Kopie.c" />
+                <File name="_c\renderer_ui_iup\src\plugin_ui_renderer - Kopie.h" />
+                <File name="_c\renderer_ui_iup\src\plugin_ui_renderer.c" />
+                <File name="_c\renderer_ui_iup\src\plugin_ui_renderer.h" />
+                <File name="_c\renderer_ui_iup\src\plugin_ui_renderer_context.c" />
+                <File name="_c\renderer_ui_iup\src\plugin_ui_renderer_context.h" />
+                <File name="_c\renderer_ui_iup\src\plugin_ui_texturing.c" />
+                <File name="_c\renderer_ui_iup\src\plugin_ui_texturing.h" />
+                <File name="_c\renderer_ui_iup\src\test_renderer_ui_iup.c" />
+                <File name="_c\renderer_ui_iup\src\test_renderer_ui_iup.h" />
+            </Folder>
+            <File name="_c\renderer_ui_iup\BACKUP_renderer_ui_iup.7z" />
+            <File name="_c\renderer_ui_iup\Makefile" />
+        </Folder>
+        <Folder name="renderer_ui_iup_rust">
+            <Folder name="src">
+                <File name="_c\renderer_ui_iup_rust\src\app.c" />
+                <File name="_c\renderer_ui_iup_rust\src\app.h" />
+                <File name="_c\renderer_ui_iup_rust\src\iup_app.c" />
+                <File name="_c\renderer_ui_iup_rust\src\iup_app.h" />
+                <File name="_c\renderer_ui_iup_rust\src\plugin.c" />
+                <File name="_c\renderer_ui_iup_rust\src\plugin.h" />
+                <File name="_c\renderer_ui_iup_rust\src\plugin_ui_main.c" />
+                <File name="_c\renderer_ui_iup_rust\src\plugin_ui_main.h" />
+                <File name="_c\renderer_ui_iup_rust\src\plugin_ui_renderer.c" />
+                <File name="_c\renderer_ui_iup_rust\src\plugin_ui_renderer.h" />
+                <File name="_c\renderer_ui_iup_rust\src\plugin_ui_texturing.c" />
+                <File name="_c\renderer_ui_iup_rust\src\plugin_ui_texturing.h" />
+                <File name="_c\renderer_ui_iup_rust\src\test_renderer_ui_iup.c" />
+                <File name="_c\renderer_ui_iup_rust\src\test_renderer_ui_iup.h" />
+            </Folder>
+            <File name="_c\renderer_ui_iup_rust\Makefile" />
+        </Folder>
     </Project>
     <Project name="rust">
         <Folder name="_learn_">
@@ -191,5 +234,8 @@
         </Folder>
         <File name="_rust\MY_BASIC_QUESTIONS.txt" />
         <File name="_rust\README_INSTALL.txt" />
+    </Project>
+    <Project name="thoughts">
+        <File name="thoughts\Druide.txt" />
     </Project>
 </NotepadPlus>
