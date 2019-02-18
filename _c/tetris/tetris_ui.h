@@ -44,7 +44,7 @@ typedef struct {
 	unsigned int 		block_size_h; 
 	unsigned int 		start_field_x;
 	unsigned int 		start_field_y;
-	unsigned int 		texture_offset_y[3];
+	unsigned int 		texture_offset_y;
 	int 				texture_mode; 			/* -1 normal drawing, 0 first texture */
     int 				texture_mode_max; 		/* -1 normal drawing, 0 first texture, 1 second.... */
 	int 				texture_cnt_offset;

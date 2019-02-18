@@ -97,7 +97,9 @@ static void __set_color_for_stone(stone_type_t *stone, float *r, float *g, float
 	}
 }
 
-static void _print_tetris_stone_cell(tetris_ui_t* ui, field_type_t *field_type, stone_type_t *stone, unsigned int cell_row, unsigned int cell_col,
+static void _print_tetris_stone_cell(tetris_ui_t* ui, 
+									 stone_type_t *stone, stone_direction_t *direction, unsigned int cell_index,
+									 unsigned int cell_row, unsigned int cell_col,
 									 unsigned int x_offset, unsigned int y_offset, unsigned int block_size_w, unsigned int block_size_h){
 	
 	static const unsigned int border_size = 1;
@@ -120,9 +122,13 @@ static void _print_tetris_stone_cell(tetris_ui_t* ui, field_type_t *field_type, 
 		tetris_gfx_draw_rect_outline_rgba(renderer, x, y, block_size_w, block_size_h, 
 						   (unsigned char)32, (unsigned char)32, (unsigned char)32, 255);
 	} else {
+		/* drawing cell with another algorithm see spec */
+		/* y * width + x */
 		SDL_Rect src;
-		src.x = *stone * block_size_w;
-		src.y = (ui->texture_cnt_offset * ui->texture_mode) + ui->texture_offset_y[*field_type];
+		//src.x = *stone * block_size_w;
+		src.x = (*direction * (4*block_size_w)) + (cell_index * block_size_w);
+		//src.y = (ui->texture_cnt_offset * ui->texture_mode) + ui->texture_offset_y;
+		src.y = *stone * block_size_h;
 		src.w = block_size_w;
 		src.h = block_size_h;
 		
@@ -138,7 +144,7 @@ static void _print_tetris_stone_cell(tetris_ui_t* ui, field_type_t *field_type, 
 					   
 }
 
-static void __print_tetris_stone(tetris_ui_t* ui, field_type_t *field_type, stone_type_t *stone, stone_direction_t *direction,
+static void __print_tetris_stone(tetris_ui_t* ui, stone_type_t *stone, stone_direction_t *direction,
 									unsigned int x, unsigned int y, unsigned int block_size_w, unsigned int block_size_h, bool delete) {
 
 	const stone_t *cur_stone = &tetris_stones[*stone].stones[*direction];
@@ -152,7 +158,7 @@ static void __print_tetris_stone(tetris_ui_t* ui, field_type_t *field_type, ston
 	
 		stone_data_t cur_cell = cur_stone->cells[cell_no];
 		
-		_print_tetris_stone_cell(ui, field_type, &used_stone, cur_cell.row, cur_cell.col, x, y, block_size_w, block_size_h);
+		_print_tetris_stone_cell(ui, &used_stone, direction, cell_no, cur_cell.row, cur_cell.col, x, y, block_size_w, block_size_h);
 	
 	}
 }
@@ -174,7 +180,7 @@ static void __print_tetris_stone_in_game(tetris_ui_t* ui, tetris_game_t* game) {
 	
 	if ( cur_stone != TETRIS_NO_STONE ) {
 	
-		__print_tetris_stone(ui, &tetris->field_type, &cur_stone, &direction, (cur_pos.col * block_size_w) + x_offset,
+		__print_tetris_stone(ui, &cur_stone, &direction, (cur_pos.col * block_size_w) + x_offset,
 										 (cur_pos.row * block_size_h) + y_offset, block_size_w, block_size_h, true);	
 	
 	}
@@ -184,7 +190,7 @@ static void __print_tetris_stone_in_game(tetris_ui_t* ui, tetris_game_t* game) {
 	cur_stone = tetris->active_stone.type;
 	direction = tetris->active_stone.direction;
 	
-	__print_tetris_stone(ui, &tetris->field_type, &cur_stone, &direction, (cur_pos.col * block_size_w) + x_offset,
+	__print_tetris_stone(ui, &cur_stone, &direction, (cur_pos.col * block_size_w) + x_offset,
 									 (cur_pos.row * block_size_h) + y_offset, block_size_w, block_size_h, false);									 
 }
 
@@ -199,8 +205,8 @@ static void __print_tetris_next_stone_sdl(tetris_ui_t* ui, tetris_game_t* game) 
 	tetris_gfx_draw_rect_rgba(ui->renderer, 20, 200, 96, 96, 0, 0, 0, 255);
 	
 	stone_direction_t direction = TETRIS_NORTH;
-	field_type_t field_type = TETRIS_NORMAL;
-	__print_tetris_stone(ui, &field_type,&game->next_stone, &direction, 20, 200, 24, 24, false);
+	
+	__print_tetris_stone(ui, &game->next_stone, &direction, 20, 200, 24, 24, false);
 }
 
 static void __print_tetris_field_sdl(tetris_ui_t* ui, tetris_game_t* game) {
@@ -223,9 +229,12 @@ static void __print_tetris_field_sdl(tetris_ui_t* ui, tetris_game_t* game) {
 	for ( unsigned int row = rows ; row--; ) {
 		for ( unsigned int col = cols ; col--; ) {
 
-			unsigned int field_value = tetris->field[row * cols + col];
+			//unsigned int field_value = tetris->field[row * cols + col];
+			field_cell_t *field_value = &tetris->field[row * cols + col];
 			
-			_print_tetris_stone_cell(ui, &game->tetris->field_type,&field_value, row, col, x_offset, y_offset, block_size_w, block_size_h);
+			_print_tetris_stone_cell(ui, &field_value->stone_type, &field_value->stone_direction, field_value->stone_cell, 
+											row, col, x_offset, y_offset, block_size_w, block_size_h);
+			//_print_tetris_stone_cell(ui, field_value, row, col, x_offset, y_offset, block_size_w, block_size_h);
 			
 		}
 	}
@@ -266,12 +275,10 @@ bool tetris_ui_init(tetris_ui_t *ui, tetris_game_t* game) {
 		ui->height = 524;
 		
 		ui->texture_mode = -1;
-		ui->texture_cnt_offset = 42;
-		ui->texture_mode_max = (ui->gfx.texture->h / 42) - 1;
+		ui->texture_cnt_offset = 192;
+		ui->texture_mode_max = (ui->gfx.texture->h / 192) - 1;
 		
-		ui->texture_offset_y[TETRIS_NORMAL] = 0;
-		ui->texture_offset_y[TETRIS_LARGE] = 24;
-		ui->texture_offset_y[TETRIS_EXTRA_LARGE] = 26;
+		ui->texture_offset_y = 0;
 		
 		ini_success = __tetris_ui_init_screen(ui);
 		

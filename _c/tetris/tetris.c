@@ -2,10 +2,6 @@
 
 const stone_position_t TETRIS_NO_POSITION = {UINT_MAX, UINT_MAX}; 
 
-const tetris_field_size_t tetris_fields[] = {
-	{20, 10}, {40, 20}, {80, 40}
-};
-
 const stone_direction_t tetris_next_direction_of[] = {
 	TETRIS_EAST, TETRIS_SOUTH, TETRIS_WEST, TETRIS_NORTH
 };
@@ -53,21 +49,18 @@ const stone_collection_t tetris_stones[] = {
 	}}
 };
 
-tetris_t* tetris_new(field_type_t type) {
+tetris_t* tetris_new() {
 	tetris_t * new_tetris = malloc(sizeof(tetris_t));
 	
-	//evaluate correct field size and set to normal if error arose
-	field_type_t used_type = type;
-	if (used_type < TETRIS_NORMAL || used_type > TETRIS_EXTRA_LARGE) used_type = TETRIS_NORMAL;
-	
 	//fetch new field size and set to tetris game
-	tetris_field_size_t field_size = tetris_fields[used_type];
-	new_tetris->field_type = used_type;
+	tetris_field_size_t field_size = {20, 10};
+	new_tetris->field_type = TETRIS_NORMAL;
 	new_tetris->field_size = field_size;
 	
 	//allocate fieldsize depend memory and init field with zeros
 	unsigned int field_buffer = field_size.rows*field_size.cols;
-	new_tetris->field = malloc(field_buffer * sizeof(unsigned int));
+	//new_tetris->field = malloc(field_buffer * sizeof(unsigned int));field_cell_t
+	new_tetris->field = malloc(field_buffer * sizeof(field_cell_t));
 	tetris_reset(new_tetris);
 	
 	return new_tetris;
@@ -85,7 +78,7 @@ void tetris_free(tetris_t** _tetris) {
 void tetris_reset(tetris_t* tetris) {
 	if ( tetris != NULL ) {
 		unsigned int field_buffer = tetris->field_size.rows * tetris->field_size.cols;
-		memset(tetris->field, 0, field_buffer * sizeof(unsigned int));
+		memset(tetris->field, 0, field_buffer * sizeof(field_cell_t));
 		tetris->active_stone.direction 	= TETRIS_NORTH;
 		tetris->active_stone.type 		= TETRIS_NO_STONE;
 		tetris->active_stone.position = TETRIS_NO_POSITION;
@@ -138,7 +131,7 @@ static int random_int(const int lnum, const int hnum){
 static bool __cell_fits_in_field(const tetris_t* tetris, const int row, const int col) {
 	//row and col are inside tetris field
 	if ( row < 0 || col < 0 || (unsigned int)row >= tetris->field_size.rows || (unsigned int)col >= tetris->field_size.cols ) return false;
-	return tetris->field[row * tetris->field_size.cols + col] == 0;
+	return tetris->field[row * tetris->field_size.cols + col].stone_type == 0;
 }
 
 static bool __stone_fit_int_position(const tetris_t* tetris, stone_t *stone) {
@@ -292,12 +285,16 @@ static void __persist_stone_in_field(tetris_t* tetris) {
 
 	const stone_position_t cur_pos = tetris->active_stone.position;
 	const stone_t *cur_stone = &tetris_stones[tetris->active_stone.type].stones[tetris->active_stone.direction];
-	
+	field_cell_t *field = tetris->field;
 	for (unsigned int cell_no = 4; cell_no--; ) {
 		stone_data_t cur_cell = cur_stone->cells[cell_no];
 		int new_row = (int)cur_pos.row + cur_cell.row;
 		int new_col = (int)cur_pos.col + cur_cell.col;
-		tetris->field[new_row * tetris->field_size.cols + new_col] = tetris->active_stone.type;
+		//tetris->field[new_row * tetris->field_size.cols + new_col] = tetris->active_stone.type;
+		field_cell_t *cur_field_cell = &field[new_row * tetris->field_size.cols + new_col];
+		cur_field_cell->stone_type = tetris->active_stone.type;
+		cur_field_cell->stone_direction = tetris->active_stone.direction;
+		cur_field_cell->stone_cell = cell_no;
 	}
 	
 }
@@ -350,7 +347,7 @@ static tetris_full_lines_t* __check_full_lines(tetris_t* tetris) {
 	for ( unsigned int row = tetris->field_size.rows ; row--;) {
 		bool row_is_full = true;
 		for ( unsigned int col = tetris->field_size.cols; col--; ) {
-			if ( tetris->field[row * tetris->field_size.cols + col] == 0 ) {
+			if ( tetris->field[row * tetris->field_size.cols + col].stone_type == 0 ) {
 				row_is_full = false;
 				break;
 			}
@@ -387,7 +384,7 @@ static void __delete_full_lines(tetris_t* tetris, tetris_full_lines_t * cur_full
 			unsigned int cur_row = cur_full_lines->lines[cnt_line];
 			
 			for ( unsigned int col = tetris->field_size.cols; col--; ) {
-				tetris->field[cur_row * tetris->field_size.cols + col] = 0;
+				tetris->field[cur_row * tetris->field_size.cols + col].stone_type = 0;
 			}
 			
 		}
@@ -404,12 +401,22 @@ static void __falling_down_other_lines(tetris_t* tetris, tetris_full_lines_t * c
 		unsigned int cur_start_row = cur_full_lines->lines[cnt_line];
 		
 		for ( unsigned int col = tetris->field_size.cols; col--; ) {
-		
+			
+			field_cell_t *field = tetris->field;
+			
 			for ( unsigned int row = cur_start_row; row > 0; --row) {
-				tetris->field[row * field_cols + col] = tetris->field[(row-1) * field_cols + col];
+				field_cell_t *target = &field[row * field_cols + col];
+				field_cell_t *source = &field[(row-1) * field_cols + col];
+				target->stone_type = source->stone_type;
+				target->stone_direction = source->stone_direction;
+				target->stone_cell = source->stone_cell;
+				//field[row * field_cols + col] = field[(row-1) * field_cols + col];
 			}
-		
-			tetris->field[0] = 0;
+			
+			field_cell_t *first = &field[0];
+			first->stone_type = 0;
+			first->stone_direction = TETRIS_NORTH;
+			first->stone_cell = 0;
 		
 		}
 	}	

@@ -70,8 +70,6 @@ typedef enum {
 
 typedef enum {
 	TETRIS_NORMAL 	= 0,
-	TETRIS_LARGE 	= 1,
-	TETRIS_EXTRA_LARGE 	= 2,
 } field_type_t;
 
 typedef enum {
@@ -112,7 +110,14 @@ typedef struct {
 typedef current_stone_t tetris_create_stone_response_t;
 
 typedef struct {
-	unsigned int 			*field;					/* Persistent Game Field */
+	stone_type_t		stone_type;		/* last/current stone type */
+	stone_direction_t	stone_direction;/* last/current stone direction */
+	unsigned int		stone_cell;		/* last/current cell index from stone */
+} field_cell_t;
+
+typedef struct {
+	//unsigned int 			*field;					/* Persistent Game Field */
+	field_cell_t			*field;					/* Persistent Game Field */
 	tetris_field_size_t 	field_size;				/* Size of the given game Field */
 	current_stone_t 		active_stone;			/* Parameter of current game Stone */
 	tetris_run_state_t 		state;					/* Actual Game State */
@@ -165,12 +170,6 @@ extern const stone_direction_t tetris_next_direction_of[];
 */
 extern const stone_collection_t tetris_stones[];
 
-/*
-	Variouse Field Size of Tetris Game:
-		tetris_fields[TETRIS_NORMAL] 	=> 10 colums, 20 rows 
-		tetris_fields[TETRIS_LARGE] 	=> 20 colums, 40 rows 
-*/
-extern const tetris_field_size_t tetris_fields[];
 
 /*
 	Default invalid Tetris Stone Position
@@ -189,8 +188,8 @@ extern const stone_position_t TETRIS_NO_POSITION;
 	------
 	The new tetris game object
 */
-tetris_t* tetris_new(field_type_t type);
-
+//tetris_t* tetris_new(field_type_t type);
+tetris_t* tetris_new();
 /*
 	This function free memory from tetris game object and set
 	used pointer to NULL.

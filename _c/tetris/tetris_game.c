@@ -30,7 +30,7 @@ bool tetris_game_init(tetris_game_t *game) {
 	bool init_success = false;
 	
 	if (game != NULL) {
-		game->tetris = tetris_new(TETRIS_NORMAL);
+		game->tetris = tetris_new();
 		__tetris_game_reset_stats(game);
 		__tetris_game_state(game);
 		init_success = true;
@@ -64,7 +64,7 @@ static void __tetris_create_new_stone(tetris_game_t * game, tetris_create_stone_
 	game->next_stone = tetris_random_stone();
 }
 
-static void __start_new_game(tetris_game_t * game, tetris_input_t *input, tetris_create_stone_response_t *stone_response, field_type_t fieldtype) {
+static void __start_new_game(tetris_game_t * game, tetris_input_t *input, tetris_create_stone_response_t *stone_response) {
 	#if debug
 		SDL_Log("GAME: start new game\n");
 	#endif
@@ -79,7 +79,7 @@ static void __start_new_game(tetris_game_t * game, tetris_input_t *input, tetris
 	if (game->tetris != NULL) {
 		tetris_free(&game->tetris);
 	}
-	game->tetris = tetris_new(fieldtype);
+	game->tetris = tetris_new();
 	tetris_start(game->tetris);
 
 	__tetris_game_reset_stats(game);
@@ -233,11 +233,7 @@ void tetris_game_update(tetris_game_t *game, tetris_input_t *input, clock_t *tic
 			/* quit application */
 			case SDLK_ESCAPE: 	state->quit = true; break;	
 			/* start new game */
-			case SDLK_F1:		__start_new_game(game, input, &stone_response, TETRIS_NORMAL);
-								break;
-			case SDLK_F2:		__start_new_game(game, input, &stone_response, TETRIS_LARGE);
-								break;
-			case SDLK_F3:		__start_new_game(game, input, &stone_response, TETRIS_EXTRA_LARGE);
+			case SDLK_F1:		__start_new_game(game, input, &stone_response);
 								break;
 			/* pause game */
 			case SDLK_F4: 		if ( !last_state->was_paused && last_state->is_running ) {

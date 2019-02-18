@@ -35,12 +35,6 @@ static void _test_tetris_alloc_() {
 	tetris_free(&tetris);
 	assert(tetris == NULL);
 	
-	tetris = tetris_new(TETRIS_LARGE);
-	assert(tetris->field_size.rows == 40);
-	assert(tetris->field_size.cols == 20);
-	tetris_free(&tetris);
-	assert(tetris == NULL);
-	
 	#if debug == 1 
 		printf("<<<\n");
 	#endif
