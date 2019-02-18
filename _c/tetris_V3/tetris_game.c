@@ -107,12 +107,18 @@ static void game_update_level_score_lines(tetris_game_t *game, tetris_move_respo
 		if ( (game->lines >= (game->level * 10)) ) {
 			state->got_level_up = true;
 			game->level++;
-			if ( game->update_intervall > 100 ) {
+			if ( game->update_intervall > 150 ) {
 				game->update_intervall -= 70;
+			} else if ( game->update_intervall > 50) {
+				game->update_intervall -= 10;
+			} else if (game->update_intervall <= 10) {
+				game->update_intervall -= 1;
+			} else if (game->update_intervall <= 1) {
+				game->update_intervall = 1;
 			}
 		}
 	}
-	game->score += (*type * 5);
+	game->score += (*type * game->level);
 }
 
 static void __move_stone_down(tetris_game_t * game, tetris_move_response_t *response, 

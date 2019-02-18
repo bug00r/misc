@@ -34,7 +34,7 @@ Uint32 tetris_input_update_down(Uint32 interval, void *param)
 		#if debug
 			SDL_Log("INPUT: game intervall found: %i\n", game_interval);
 		#endif
-		if ( interval < game_interval) {
+		if ( game_interval < interval ) {
 			#if debug
 				SDL_Log("INPUT: update intervall old: %i  new: %i\n", interval, game_interval);
 			#endif
