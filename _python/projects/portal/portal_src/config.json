@@ -1,9 +1,0 @@
-{
-  "extensionpath" : "ext",
-  "startrequest" : {
-    "extension": "_portal_",
-    "interface": "start",
-    "parameter": null
-  },
-  "response": null
-}
