@@ -1,0 +1,10 @@
+<project>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>de.bug0r.bot</groupId>
+	<artifactId>tools_core</artifactId>
+	<packaging>jar</packaging>
+	<version>1.0-SNAPSHOT</version>
+	<name>tools_core</name>
+	<url>http://no.url.available</url>
+</project>
+

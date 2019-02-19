@@ -1,0 +1,25 @@
+Multibot:
+	ArgumentParser
+	Client
+	ClientServer
+	CommandLine Tools
+	Context
+	ContextLoader
+	ContextManager
+	tools_core
+	tools_listener
+	
+	
+control=plugin	action=load	type=jar	alias=irc	source=jar:file:/H:/apps/bot/plugins/app/app_irc.jar!/
+control=plugin	action=load	type=jar	alias=orakel	source=jar:file:/H:/apps/bot/plugins/bot/orakel.jar!/	parent=irc
+control=plugin	action=load	type=jar	alias=auth	source=jar:file:/H:/apps/bot/plugins/bot/auth.jar!/	parent=irc
+control=plugin	action=load	type=jar	alias=zitate	source=jar:file:/H:/apps/bot/plugins/bot/zitate.jar!/	parent=irc
+control=plugin	action=load	type=jar	alias=xwin	source=jar:file:/H:/apps/bot/plugins/bot/xwin.jar!/	parent=irc
+control=plugin	action=bind	targetList=irc	sourceList=auth,orakel,zitate,xwin
+//control=plugin	action=unbind	sourceList=orakel,zitate,xwin targetList=irc
+//control=plugin	action=remove	list=orakel,zitate,xwin
+control=context	alias=irc	action=create	server=se.quakenet.org	port=6667	host=Hosti	nick=bug0rBot	realName=RealBug0rBot
+control=context	alias=irc	action=delegate	delegate=plugin	server=se.quakenet.org	plugin=bind	list=auth,orakel,zitate,xwin
+control=context	alias=irc	action=connect	server=se.quakenet.org
+control=context	alias=irc	action=delegate	delegate=message	server=se.quakenet.org	message=PASS gnahhrr54345345
+control=context	alias=irc	action=delegate	delegate=message	server=se.quakenet.org	message=JOIN #fraternized

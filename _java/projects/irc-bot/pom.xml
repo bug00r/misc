@@ -1,0 +1,44 @@
+<project>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>de.bug0r.bot</groupId>
+	<artifactId>bug0r-bot</artifactId>
+	<version>1.0</version>
+	<name>IRC Java Bot</name>
+	<url>http://no.url.available</url>
+	<packaging>pom</packaging>
+	<properties>
+           <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	
+	<modules>
+		<module>tools_core</module>
+		<module>tools_listener</module>
+	
+		<module>Interface-Configuration</module>
+		<module>Interface-Message</module>
+		<module>Interface-Parser</module>
+		<module>Interface-Plugin</module>
+	
+		<module>IRC-Bridge</module>
+		<module>IRC-Context</module>
+		<module>IRC-Message</module>
+		<module>IRC-Parser</module>
+		<module>IRC-Plugin</module>
+		<module>IRC-Protocol</module>
+	
+		<module>APP-Client</module>
+		<module>APP-Context</module>
+		<module>APP-Parser</module>
+		<module>APP-Plugin</module>
+	
+		<module>Multibot</module>
+		<module>Multibot-Terminal</module>
+		
+		<module>plugin-app-irc</module>
+		<module>Pluginloader-Jar</module>
+		<module>plugin-orakel</module>
+		<module>plugin-xwin</module>
+		<module>plugin-zitate</module>
+	
+	</modules>
+</project>

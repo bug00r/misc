@@ -1,0 +1,5 @@
+1. Spielstart: !x start 5 10 5 haxx,FLOPPER,pixel,QSTEV,FickSau
+	erzeugt bei !x stat         Ergebnis: 5
+
+2. Post des Spielfeldes dauert zu lange
+3. Keine Überprüfung der Spieler. Gehört in den Context

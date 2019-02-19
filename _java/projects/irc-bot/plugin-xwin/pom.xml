@@ -1,0 +1,49 @@
+<project>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>de.bug0r.bot</groupId>
+	<artifactId>plugin-xwin</artifactId>
+	<packaging>jar</packaging>
+	<version>1.0-SNAPSHOT</version>
+	<name>plugin-xwin</name>
+	<url>http://no.url.available</url>
+	<dependencies>
+		<dependency>
+		  <groupId>de.bug0r.bot</groupId>
+		  <artifactId>Interface-Message</artifactId>
+		  <version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+		  <groupId>de.bug0r.bot</groupId>
+		  <artifactId>Interface-Plugin</artifactId>
+		  <version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+		  <groupId>de.bug0r.bot</groupId>
+		  <artifactId>IRC-Bridge</artifactId>
+		  <version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+		  <groupId>de.bug0r.bot</groupId>
+		  <artifactId>IRC-Message</artifactId>
+		  <version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+		  <groupId>de.bug0r.bot</groupId>
+		  <artifactId>IRC-Plugin</artifactId>
+		  <version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+		  <groupId>de.bug0r.bot</groupId>
+		  <artifactId>tools_core</artifactId>
+		  <version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>6.2</version>
+      <scope>test</scope>
+    </dependency>
+	</dependencies>
+	
+</project>
+

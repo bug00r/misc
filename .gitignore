@@ -31,6 +31,15 @@ _dlang/_projects/dlangui-0.9.182/
 /_javascript/opt/
 /_kotlin/kotlinc/
 /_kotlin/kotlinnw/
+**/*.class
+.classpath
+**/target
+**/**/target-output/
+**/**/test-output/
+**/.settings
+**/*~
+.project
+**/*.jar
 /_lisp/
 /_lua/LuaJIT-2.0.5
 /_perl/strawberry-perl_5_28/

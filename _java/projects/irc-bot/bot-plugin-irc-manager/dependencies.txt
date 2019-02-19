@@ -1,0 +1,10 @@
+plugin-irc-manager:
+	Context
+	ContextManager
+	Interface-Message
+	Interface-Parser
+	IRC-Message
+	IRC-Parser
+	IRC-Protocol
+	tools_Listener
+	
