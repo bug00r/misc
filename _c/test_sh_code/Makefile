@@ -1,4 +1,4 @@
-all: opcodes build run asm hw
+all: opcodes build run asm hw small
 
 #gcc -S -c tst.c -o -
 # or 
@@ -18,8 +18,12 @@ opcodes:
 
 #-lkernel32 -luser32 -lgdi32 -lwinspool -lcomdlg32 -ladvapi32 -lshell32 -luuid -lole32 -loleaut32 -lcomctl32 -lws2_32 -lmsvcrt
 asm:
-	gcc test.s -g -ggdb --entry=WinMain -o test.exe
+	gcc test.s -O0 -g -ggdb --entry=WinMain -o test.exe
 	./test.exe
+
+small:
+	-strip test.exe
+	-upx --best --ultra-brute test.exe
 
 hw:
 	gcc hw.c -c

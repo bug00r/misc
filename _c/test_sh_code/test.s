@@ -1,119 +1,51 @@
+#WINDOWS: RCX, RDX, R8, R9
 #
-#           POWER FUNCTION
-#           ---------------
-#EAX - BASE
-#EDI - EXP
-# 2 * 2 * 2 * 2 * 2 = 2^5
+#The Microsoft x64 calling convention is followed on Windows and pre-boot UEFI (for long mode on x86-64). 
+#It uses registers 
 #
-#.section .data
+#RCX, RDX, R8, R9 for the first four integer or pointer arguments (in that order), 
+#and XMM0, XMM1, XMM2, XMM3 are used for floating point arguments. Additional arguments 
+#are pushed onto the stack (right to left). 
+#Integer return values (similar to x86) are returned in RAX if 64 bits or less. 
+#Floating point return values are returned in XMM0. Parameters less than 64 bits long are not zero extended; 
+#the high bits are not zeroed.
 #
-#.section .text
+#LINUX/OSX: RDI, RSI, RDX, RCX, R8, R9
 #
-#    .globl WinMain 
+#The calling convention of the System V AMD64 ABI is followed on Solaris, Linux, FreeBSD, OS X, and other UNIX-like or
+#POSIX-compliant operating systems. 
 #
-#        WinMain:
-#                mov $1, %ebx
-#                pushq $2
-#                pushq $5
-#                call _powr
-#                jmp _eof
+#The first six integer or pointer arguments are passed in registers RDI, RSI, RDX, RCX, R8, and R9, 
+#while XMM0, XMM1, XMM2, XMM3, XMM4, XMM5, XMM6 and XMM7 are used for floating point arguments. 
+#For system calls, R10 is used instead of RCX. As in the Microsoft x64 calling convention, 
+#additional arguments are passed on the stack and the return value is stored in RAX.
 #
-#                _powr:
-#                    pushq %rax
-#                    movl  %esp, %ebp
-#                    subl  $4, %esp
-#                    movl 8(%ebp),%edi
-#                    movl 12(%ebp) , %eax
-#                    call powr_loop
-#                    movl %ebp, %esp
-#                    popq %rax
-#                    ret;
+#.extern printf
+#.extern exit
+#.data
+#_hello:
+#  .asciz "hello world\n"
 #
-#
-#                powr_loop:
-#                    cmp $0,%edi
-#                    je _return
-#                    #ebx = ebx * eax
-#                    imull %eax,%ebx
-#                    decl %edi
-#                    jmp powr_loop
-#
-#                _return:
-#                    ret
-#                _eof:
-#                    call _exit
-#
-#/*****************************************************************************
-#* powers.s
-#*
-#* Displays powers of 2 from 2^0 to 2^31, one per line.  It should be linked
-#* with a C runtime library.  The C runtime library contains startup code
-#* so you do not have to specify a starting label.  The startup code in
-#* the C library eventually calls main.
-#*
-#* Assembler: gas
-#* OS: Any Win32-based OS
-#* Other libraries: Use the gccs C runtime library
-#* Assemble and link: "gcc powers.s" (gcc links the C library automatically)
-#*****************************************************************************/
-#
-#        .global WinMain
-#		.extern printf
-#        .text
-#format: .asciz  "%d\n"
-#
+#.text
+#.globl WinMain
 #WinMain:
-#        pushq   %rsi                    /* callee save registers */
-#        pushq   %rdi
-#        
-#        movq    $1, %rsi                /* current value */
-#        movq    $31, %rdi               /* counter */
-#L1:
-#        pushq   %rsi                    /* push value of number to print */
-#        #pushq   $format                 /* push address of format */
-#		movq $format, %rdi
-#		call    printf
-#        addq    $8, %rsp
+#  subq $8, %rsp
+#  movb $0, %al
+#  leaq _hello(%rip), %rcx
+#  call printf
 #
-#        addq    %rsi, %rsi              /* double value */
-#        decq    %rdi                    /* keep counting */
-#        jnz     L1
-#        
-#        popq    %rdi
-#        popq    %rsi
-#        ret
-# ----------------------------------------------------------------------------------------
-# Writes "Hola, mundo" to the console using a C library. Runs on Linux or any other system
-# that does not use underscores for symbols in its C library. To assemble and run:
-#
-#     gcc hola.s && ./a.out
-# ----------------------------------------------------------------------------------------
-# -----------------------------------------------------------------------------
-# A 64-bit program that displays its commandline arguments, one per line.
-#
-# On entry, %rdi will contain argc and %rsi will contain argv.
-# -----------------------------------------------------------------------------
-
+#  movq $0, %rcx
+#  call exit
+#  ret
+# 
         .global WinMain
 
         .text
-WinMain:
-        push    %rdi                    # save registers that puts uses
-        push    %rsi
-        sub     $8, %rsp                # must align stack before call
-
-        mov     (%rsi), %rdi            # the argument string to display
-        call    puts                    # print it
-
-        add     $8, %rsp                # restore %rsp to pre-aligned value
-        pop     %rsi                    # restore registers puts used
-        pop     %rdi
-
-        add     $8, %rsi                # point to next argument
-        dec     %rdi                    # count down
-        jnz     main                    # if not done counting keep going
-
-        ret
-format:
-        .asciz  "%s\n"
- 
+WinMain:                                   # This is called by C library's startup code
+		mov     $message, %rcx          # First integer (or pointer) parameter in %rdi
+        call    puts                    # puts(message)
+		movq $0, %rcx
+		call exit
+		ret                            # Return to C library code
+message:
+        .asciz "Hola, mundo"            # asciz puts a 0 byte at the end
