@@ -1,0 +1,46 @@
+Lessons to Learn:
+
+Source:
+Type:	Book
+Title:	Modern X86 Assembly Language Programming 32-bit, 64-bit, SSE and AVX
+
+Chapter 1: X86-32 Core Architecture
+
+- fundamental x86 Datatypes:
+
+	Type			Len in Bits		Typical Use
+	--------------------------------------------
+	Byte			8				Character, Integer, Binary Coded Decimals(BCD)
+	Word			16				Characters, Integers
+	Doubleword		32				Integers, single precision floating point
+	Quadword		64				Integers, double precision floating foint, packed integers
+	Quintword		80				Double extended-precision floating point, packed BCD
+	Double Quadword	128				packed Integers, packed floating point
+	Quad Quadword	256				packet integers, packed floating point
+
+	from right to left (0 - (Len -1)) (LSB - MSB)
+
+- A Datatype Value should be properly aligned: 
+	-example word Doubleword should be stored in a memory location divisible by four, Word by two and so on.
+
+- CPU fundamental Numerical datatypes:
+
+	Type			Size in Bits	Equivalent C/C++ Type
+	-----------------------------------------------------
+	
+	signed ints		8				char
+					16				short
+					32				int, long
+					64				long long
+	
+	unsigned ints	8				unsigned char
+					16				unsigned short
+					32				unsigned int, unsigned long
+					64				unsigned long long
+					
+	Floating Point	32				float
+					64				double
+					80				long double
+					
+continue Page 6
+					
