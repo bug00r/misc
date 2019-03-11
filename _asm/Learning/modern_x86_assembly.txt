@@ -42,5 +42,185 @@ Chapter 1: X86-32 Core Architecture
 					64				double
 					80				long double
 					
-continue Page 6
+- X86 Packed Data Types
+
+	Packed Size (Bits)	Data Element Type			Number of Items
+	---------------------------------------------------------------
+	64 					8-bit integers 				8
+						16-bit integers 			4
+						32-bit integers 			2
+	
+	128 				8-bit integers 				16
+						16-bit integers 			8
+						32-bit integers 			4
+						64-bit integers 			2
+						Single-precision 
+						floating-point 				4
+						Double-precision 
+						floating-point 				2
+						
+	256 				8-bit integers 				32
+						16-bit integers 			16
+						32-bit integers 			8
+						64-bit integers 			4
+						Single-precision 
+						floating-point 				8
+						Double-precision 
+						floating-point 				4
+
+- X86 Registers 
+	
+	Segment Registers
+	-----------------
+	CS, DS, SS, ES, FS, GS
+	
+	Usage:	
+		- logical memory model 	
+			- program execution
+			- data storage
+	
+	General Purpose Registers
+	-------------------------
+	EAX, EBX, ECX, EDX, ESI, EDI, EBP, ESP
+	AL, BL, CL, DL ( 8bit low order Bytes of Above(EAX...))
+	AX, BX, CX, DX ( 8bit low order Words of Above(EAX...))
+	
+	Structure:
+	
+	EAX = 32 Bit(0-31), AX = 16 Bit(0-15) of EAX, AH = 8 Bit(8-15) of EAX, AL = 8 Bit(0-7) of EAX 	
+	EBX = 32 Bit(0-31), BX = 16 Bit(0-15) of EBX, BH = 8 Bit(8-15) of EBX, BL = 8 Bit(0-7) of EBX 
+	ECX = 32 Bit(0-31), CX = 16 Bit(0-15) of ECX, CH = 8 Bit(8-15) of ECX, CL = 8 Bit(0-7) of ECX 
+	EDX = 32 Bit(0-31), DX = 16 Bit(0-15) of EDX, DH = 8 Bit(8-15) of EDX, DL = 8 Bit(0-7) of EDX 
+	ESI = 32 Bit(0-31), SI = 16 Bit(0-15)
+	EDI = 32 Bit(0-31), DI = 16 Bit(0-15)
+	EBP = 32 Bit(0-31), BP = 16 Bit(0-15)
+	ESP = 32 Bit(0-31), SP = 16 Bit(0-15)
+	
+	Usage:
+		- performing logical, arithmetic and address calculations
+		- temporary storage
+		- pointers to data items stored in memory
+		- 
+
+	Conventional Usage
+	------------------
+	EAX		Accumulator
+	EBX		Memory Pointer, base Register
+	ECX 	Loop Control, counter
+	EDX		Integer Multiplication, Integer Division
+	ESI		String Instruction source pointer, index register
+	EDI		String Instruction destination pointer, index register
+	ESP		Stack Pointer
+	EBP		Stack Frame base pointer
+
+	The usage conventions shown in Table are common
+	practices, but are not compulsory(verpflichtend).
+
+	Program Status and Control
+	--------------------------
+	EFLAGS
+	
+		a Series of Status Flags:
+			- results of logical and arithmetic operations
+			- system control bits 
+			
+		Conventional usage
+		------------------
+		
+		Bit		Name						Symbol	Use		most important for dev.
+		---------------------------------------------------------------------------
+		0 		Carry Flag 					CF 		Status	(X)
+		1 		Reserved 							1
+		2 		Parity Flag 				PF 		Status	(X)
+		3 		Reserved 							0
+		4 		Auxiliary Carry Flag 		AF 		Status	(X)
+		5 		Reserved 							0
+		6 		Zero Flag 					ZF 		Status 	(X)
+		7 		Sign Flag 					SF 		Status	(X)
+		8 		Trap Flag 					TF 		System
+		9 		Interrupt Enable Flag 		IF 		System
+		10 		Direction Flag 				DF 		Control
+		11 		Overflow Flag 				OF 		Status	(X)
+		12 		I/O Privilege Level Bit 0 	IOPL 	System
+		13 		I/O Privilege Level Bit 1 	IOPL 	System
+		14 		Nested Task 				NT 		System
+		15 		Reserved 							0
+		16 		Resume Flag 				RF 		System
+		17 		Virtual 8086 Mode 			VM 		System
+		18 		Alignment Check 			AC 		System
+		19 		Virtual Interrupt Flag 		VIF 	System
+		20 		Virtual Interrupt Pending 	VIP 	System
+		21 		ID Flag 					ID 		System
+		22 - 31 Reserved 							0
+		
+		
+		Description:
+		
+		AF	-	The auxiliary carry flag denotes a carry or borrow condition during binary-coded decimal addition or subtraction
+		CF	-	The carry flag is et by the processor to signify an overflow condition when performing unsigned integer arithmetic. 
+				It is also used by some register rotate and shift instructions.
+		OF	-	The overflow flag signals that the result of a signed integer operation is too small or too large.
+		PF	-	The parity flag indicates whether the least-significant byte of a result contains an even number of 1 bits
+		ZF	-	was set by logical and arithmetic instructions with the result of zero
+		SF	-	was set by logical and arithmetic instructions with the result of negative or positive
+		DF	-	An	application program can set or reset the direction flag, which defines the auto increment direction 
+				(0 = low-to-high addresses, 1 = high-to-low addresses) of the EDI and ESI registers during execution of the string 
+				instructions
+				
+		The remaining bits in the EFLAGS register are used exclusively by the operating system to manage interrupts, restrict I/O
+		operations, and support program debugging. They should never be modified by an application program. Reserved bits should 
+		also never be modified and no assumptions should ever be made regarding the state of any reserved bit.
+	
+	Instruction Pointer
+	-------------------
+	EIP
+	
+	Usage:
+		set by call, jmp(jump), jcc(Jump if Condition is Met) 
+	
+- X87 Register Stack (MMX Registers)
+	
+	R7 (MM7)
+	R6 (MM6)
+	R5 (MM5)
+	R4 (MM4)
+	R3 (MM3)
+	R2 (MM2)
+	R1 (MM1)
+	R0 (MM0)
+
+- AVX / SSE Registers
+	
+	YMM0 / XMM0
+	YMM1 / XMM1
+	YMM2 / XMM2
+	YMM3 / XMM3
+	YMM4 / XMM4
+	YMM5 / XMM5
+	YMM6 / XMM6
+	YMM7 / XMM7
+	
+	Control and Status
+	------------------
+	MXCSR
+
+- Many instructions require or implicitily specific registers as operands
+
+	Example:	- imul(Signed Multiply) uses EDX to hold high order double word of product
+				- idiv(Signed Divide)	uses EDX to hold high order double word of divident
+				- String instructions   uses ESI(source address) and EDI(destination address)
+										uses ECX as Count register by using repeat prefix
+				- Bit shift and rotate instructions must load bit count value into CL register.
+				- Proessor used ESP to support stack related operations such as functions calls and returns
+				- EBP is typically used as base pointer to access data items that are stored on the stack.
+				  When not employed as a byse pointer, it can be used as general purpose register.
 					
+				
+- Stack is simply a continuous block of memory that is assigend to a process or thread by OS.
+  Application Programs can also use the stack to pass function arguments and store temporara data.
+  The ESP Register always point to the top of the stack(last stack item)
+  
+  You can use the ESP as a general purpose register but such use is impractical and strongly discouraged
+
+- Instruction Operands
+
