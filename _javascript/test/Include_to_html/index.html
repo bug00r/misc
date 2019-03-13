@@ -6,10 +6,46 @@
 	<meta name="Access-Control-Allow-Origin" content="*">
 	<meta name="Access-Control-Allow-Credentials" content="true">
 	<meta name="Access-Control-Allow-Methods" content="POST,GET">
-	<link rel="import" href="test.xml">
+	<!--<link rel="import" type="application/xml" href="test.xml">-->
 </head>
 <body>
 	<script id="testxml" type="text/xml-external-parsed-entity" src="test.xml" defer></script>
+	<!--<object form="mydatform" id="mydata" data="test.xml" width="50" height="50"></object>-->
+	<input type="file"
+       id="mydata" name="avatar" value="C:\dev\testplace\github\misc\_javascript\test\Include_to_html\test.xml" />
+	<script>
+		function loaddata () {
+			if (window.File && window.FileReader && window.FileReaderSync && window.FileList && window.Blob) {
+				var file = document.getElementById('mydata').files[0];
+				if(file)
+				{
+				  // create an identical copy of file
+				  // the two calls below are equivalent
+				  var reader = new FileReaderSync();
+				  var fileClone = file.slice();
+				  
+				  alert(reader.readAsText(fileClone));
+				  //var fileClone2 = file.slice(0, file.size);
+
+				  // slice file into 1/2 chunk starting at middle of file
+				  // Note the use of negative number
+
+				  var fileChunkFromEnd = file.slice(-(Math.round(file.size/2)));
+
+				  // slice file into 1/2 chunk starting at beginning of file
+
+				  var fileChunkFromStart = file.slice(0, Math.round(file.size/2));
+
+				  // slice file from beginning till 150 bytes before end
+
+				  var fileNoMetadata = file.slice(0, -150, "application/experimental");
+				}
+			} else {
+			  alert('The File APIs are not fully supported in this browser.');
+			}
+		
+		}
+	</script>
 	<a id="tt">blubb</a>
 </body>
 </html>

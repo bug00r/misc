@@ -1,0 +1,7 @@
+Extensions: like tcllib
+
+http://core.tcl.tk/jenglish/gutter/browse.html
+
+http://core.tcl.tk/tcllib/doc/trunk/embedded/www/toc.html
+
+BWidgets installation

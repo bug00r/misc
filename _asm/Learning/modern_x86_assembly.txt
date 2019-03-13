@@ -224,3 +224,508 @@ Chapter 1: X86-32 Core Architecture
 
 - Instruction Operands
 
+	- There are three types of operands
+		- immediate (only source operands can be mmediate)
+		- register (general purpose register)
+		- memory (specific location in memory which can be any data type you can see above)
+			- only source or destination operand can be memory operand, not both
+	
+	Operands Examples(intel syntax):
+	
+	Type			Example					Equivalent C/C++ Statement
+	------------------------------------------------------------------
+	Immediate		mov eax, 42				eax = 42
+					imul ebx, 11h			ebx *= 0x11
+					xor dl, 55h				dl ^= 0x55
+					add esi, 8				esi += 8
+	
+	Register		mov eax, ebx			eax = ebx
+					inc	ecx					ecx += 1
+					add ebx, esi			ebx += esi
+					mul ebx					edx:eax = eax * ebx		;implicit EAX and explicit EBX; Implicit register pair EDX:EAX used as destination.
+																	;The multiplicative product’s high-order and low-order doublewords are stored
+																	;in EDX and EAX, respectively
+	
+	Memory			mov eax, [ebx]			eax = *ebx
+					add eax, [val1]			eax += *val1
+					or ecx, [ebx+esi]		ecx |= *(ebx + esi)
+					sub word ptr [edi], 12	*(short*)edi -= 12		;word ptr is like cast
+					
+
+	Memory Addressing Modes:
+	
+	The x86-32 instruction set supports using up to four separate components to specify a
+	memory operand. The four components include a fixed displacement value, a base register,
+	an index register, and a scale factor. Subsequent to each instruction fetch that specifies a
+	memory operand, the processor calculates an effective address in order to determine the
+	final memory address of the operand. An effective address is calculated as follows:
+	
+	Effective Address = BaseReg + IndexReg * ScaleFactor + Disp
+	
+	BaseReg				- can be any general purpose register 
+	IndexReg			- can be any general purpose register except ESP
+	Disp(Displacement)	- Constant Offsets that  are encoded within instruction
+	ScaleFactor			- valid values are 1, 2, 4, 8
+	EffectiveAddress	- The size of the effective Address is always 32 bits
+
+	The x86-32 instruction set supports eight different memory-operand addressing forms, as listed in Table
+	
+	Addressing Form								Example
+	--------------------------------------------------------------------
+	Disp										mov eax, [MyVal]
+	BaseReg										mov eax, [ebx]
+	BaseReg + Disp								mov eax, [ebx+12]
+	Disp + IndexReg * ScaleFactor				mov eax, [MyArray+esi*4]
+	BaseReg + IndexReg							mov eax, [ebx+esi]
+	BaseReg + IndexReg + Disp					mov eax, [ebx+esi+12]
+	BaseReg + IndexReg * ScaleFactor			mov eax, [ebx+esi*4] 
+	BaseReg + IndexReg * ScaleFactor + Disp		mov eax, [ebx+esi*4+20]
+	
+	
+- Instruction Set Overview
+	
+	Condition Code				Mnemonic Suffix			Test Condition
+	-------------------------------------------------------------------------
+	
+	Above						A						CF == 0 && ZF == 0
+	Neigther below or equal		NBE
+	
+	Above or Equal				AE						CF == 0
+	Not below					NB
+	
+	Below						B						CF == 1
+	Neighter above nor equal	NAE
+	
+	Below or Equal				BE 						CF == 1 && ZF == 1
+	Not above					NAE
+	
+	Equal						E						ZF == 1
+	Zero						Z						
+	
+	Not Equal					NE 						ZF == 0
+	Not Zero					NZ				
+	
+	Greater						G						ZF == 0 && SF == OF
+	Neighter less nor equal		NLE
+	
+	Greater or Equal			GE 						SF == OF
+	Not less					NL
+	
+	Less						L  						SF != OF
+	Neighter greater nor equal	NGE 					
+	
+	Less or equal 				LE 						ZF == 1 || SF != OF
+	Not greater					NG 
+	
+	Sign						S 						SF == 1
+
+	Not Sign					NS                      SF == 0
+	
+	Carry 						C   					CF == 1
+	
+	Not Carry					NC 						CF == 0
+	
+	Overflow 					O 						OF == 1
+	
+	Not Overflow 				NO 						OF == 0
+	
+	Parity 						P 						PF == 1 
+	Parity even					PE 
+	
+	Not Parity					NP						PF == 0
+	Parity odd
+	
+	
+	Instruction Categories
+	----------------------
+		- Data transfer
+		- Data comparision
+		- Data conversion
+		- Binary arithmetic
+		- Logical
+		- Rotate and shift
+		- Byte set and bit strings
+		- String
+		- Flags
+		- Control transfer
+		- Miscellaneous
+
+- Data Transfer
+	
+	- copy or exchange data between GPR(general purpose register) or 
+	  GPR and memory in conditional or unconditional manner.
+	  
+	
+	Data Transfer Instructions:
+	
+		Mnemonic	Description
+		--------------------------------------------------------------------------
+		
+		mov 		Copies data from / to GPR or memory location to / from a GPR
+					or memory location. The instruction also can be used to copy
+					an immediate value to a GPR or memory location.
+					
+		cmovcc		Conditionally copies data from memory location or GPR to a GPR
+					The cc in the mnemonic denotes a condition code from table above.
+					
+		push		pushes a GPR, memory location or immediate valueonto the stack.
+					This instruction subtracts four from ESP and copies the specified
+					operand to the memory location pointed to by ESP.
+		
+		pop			Pops the top-most item from the stack. This instruction copies the 
+					contents of the memory location pointed to by ESP to the specified
+					GPR or memory location; it then adds four to ESP
+					
+		pushad 		Pushes the contents of all eight GPRs onto the stack
+		
+		popad		Pops the stack to restore the contents of all GPRs. The Stack value
+					for ESP is ignored.
+					
+		xchg		Exchanges data between two GPRs or a GPR and a memory location. The
+					Processor uses a locked bus cycle if the register memory form of the
+					instruction is used.
+					
+		xadd		Exchanges data between two GPRs or a GPR and a memory location.
+					The sum of the two operands is then saved to the destination operand.
+					
+		movsx		Sign-extends the contents of a GPR or memory location and copies the 
+					result value to a GPR.
+					
+		movzx		Zero-extends the contents of a GPR or memory location and copies the 
+					result to a GPR.
+		
+- Binary Arithmetic
+
+	- addition, substraction, multiplication and division using signed and unsigned integers.
+	- Performing adjustments on packed and unpacked BCD values.
+	
+	
+	Binary Arithmetic Instructions:
+	
+		Mnemonic	Description
+		--------------------------------------------------------------------------------
+		
+		add			Adds the source operand and the destination operand. This instruction 
+					can be used for both signed and unsigned integers.
+		
+		adc			Adds the source operand, destination operand and the state of EFLAGS.CY(Carry)
+					This instruction can be used for both signed and unsigned integers.
+		
+		sub			Subtracts the source operand from the destination operand. This instruction
+					can be used for both signed and unsigned integers.
+					
+		sbb			Subtracts the sum of the source operand and EFLAGS.CY from the destination
+					operand. This instruction can be used for both signed and unsigned integers.
+		
+		imul		Performs a signed multiply between two operands. This instruction
+					supports multiple forms, including a single source operand (with AL, AX,
+					or EAX as an implicit operand), an explicit source and destination operand,
+					and a three-operand variant (immediate source, memory/register source,
+					and GPR destination).
+					
+		mul			Performs an unsigned multiply between the source operand and the AL, AX, or
+					EAX register. The results are saved in the AX, DX:AX, or EDX:EAX registers.
+		
+		idiv		Performs a signed division using AX, DX:AX, or EDX:EAX as the dividend
+					and the source operand as the divisor. The resultant quotient and
+					remainder are saved in register pair AL:AH, AX:DX, or EAX:EDX.
+	
+		div 		Performs an unsigned division using AX, DX:AX, or EDX:EAX as the
+					dividend and the source operand as the divisor. The resultant quotient and
+					remainder are saved in register pair AL:AH, AX:DX, or EAX:EDX.
+					
+		inc 		Adds one to the specified operand. This instruction does not affect the value
+					of EFLAGS.CY.
+					
+		dec			Subtracts one from the specified operand. This instruction does not affect
+					the value EFLAGS.CY.
+					
+		neg			Computes the two’s complement value of the specified operand.
+		
+		daa			Adjusts the contents of the AL register following an add instruction using
+					packed BCD values in order to produce a correct BCD result.
+					
+		das			Adjusts the contents of the AL register following a sub instruction using
+					packed BCD values in order to produce a correct BCD result.
+					
+		aaa			Adjusts the contents of the AL register following an add instruction using
+					unpacked BCD values in order to produce a correct BCD result.
+					
+		aas			Adjusts the contents of the AL register following a sub instruction using
+					unpacked BCD values in order to produce a correct BCD result.
+					
+		aam			Adjusts the contents of the AX register following a mul instruction using
+					unpacked BCD values in order to produce a correct BCD result.
+					
+		aad			Adjusts the contents of the AX register to prepare for an unpacked BCD
+					division. This instruction is applied before a div instruction that uses
+					unpacked BCD values.
+		
+- Data Comparision
+
+	- comparing two operands and set various status flags.
+					
+	Data Comparision Instructions:
+	
+		Mnemonic	Description
+		--------------------------------------------------------------------------------
+		
+		cmp			Compares two operands by subtracting the source operand from the
+					destination and then sets the status flags. The results of the subtraction
+					are discarded. The cmp instruction is typically used before a jcc, cmovcc,
+					or setcc instruction.
+
+		cmpxchg		Compares the contents of register AL, AX, or EAX with the destination
+					operand and performs an exchange based on the results.
+		
+		cmpxchg8b	Compares EDX:EAX with an 8-byte memory operand and performs an
+					exchange based on the results.
+		
+
+- Data Conversion
+
+	- sign-extend(Zeichenverlängerung) of integer values in AL, AX or EAX register
+	
+	For example, sign-extending the 8-bit value 0xe9 (-23) to 16-bits yields 0xffe9.
+	
+	Data Conversion Instructions:
+	
+		Mnemonic	Description
+		--------------------------------------------------------------------------------
+		
+		cbw			Sign-extends register AL and saves the results in register AX.	
+		
+		cwde		Sign-extends register AX and saves the results in register EAX.
+		
+		cwd 		Sign-extends register AX and saves the results in register pair DX:AX.
+		
+		cdq			Sign-extends register EAX and saves the results in register pair EDX:EAX.
+		
+		bswap		Reverses the bytes of a value in a 32-bit GPR, which converts the original
+					value from little-endian ordering to big-endian ordering or vice versa.
+					
+		movbe		Loads the source operand into a temporary register, reverses the
+					bytes, and saves the result to the destination operand. This instruction
+					converts the source operand from little-endian to big-endian format or
+					vice versa. One of the operands must be a memory location; the other
+					operand must be a GPR.
+					
+		xlatb		Converts the value contained in the AL register to another value using a
+					lookup table pointed to by the EBX register.
+					
+- Logical
+	
+	- bitwise logical operations on operands
+	- The processor updates status flags EFLAGS.PF, EFLAGS.SF, and
+	  EFLAGS.ZF to reflect the results of these instructions except where noted
+	  
+	  
+	Logical Instructions:
+	
+		Mnemonic	Description
+		--------------------------------------------------------------------------------
+		
+		and			Calculates the bitwise AND of the source and destination operands.
+		
+		or 			Calculates the bitwise inclusive OR of the source and destination operands.
+		
+		xor			Calculates the bitwise exclusive OR of the source and destination operands.
+		
+		not 		Calculates the one’s complement of the specified operand. This instruction
+					does not affect the status flags.
+					
+		test		Calculates the bitwise AND of the source and destination operand and
+					discards the results. This instruction is used to non-destructively
+					set the status flags.
+	
+- Rotate and Shift
+
+	- available for single or multiple bit operations
+	- multiple bit rotate and shift instructions are using the CL register for bit count.
+	- rotate operations can be performed with or without carry flag.
+	
+	Rotate and Shift Instructions:
+	
+		Mnemonic	Description
+		--------------------------------------------------------------------------------
+		
+		rcl			Rotates the specified operand to the left. EFLAGS.CY flag is included
+					as part of the rotation.
+		
+		rcr 		Rotates the specified operand to the right. EFLAGS.CY flag is included
+					as part of the rotation.
+		
+		rol			Rotates the specified operand to the left.
+		
+		ror			Rotates the specified operand to the right.
+		
+		sal / shl	Performs an arithmetic left shift of the specified operand.
+		
+		sar			Performs an arithmetic right shift of the specified operand.
+
+		shr 		Performs a logical right shift of the specified operand.
+		
+		shld		Performs a double-precision logical left shift using two operands.
+		
+		shrd		Performs a double-precision logical right shift using two operands.
+		
+
+- Byte Set and Bit String
+
+	- setting byte values
+	
+		Byte Set and Bit String Instructions:
+	
+		Mnemonic	Description
+		--------------------------------------------------------------------------------
+		
+		setcc		Sets the destination byte operand to 1 if the condition code specified by
+					cc is true; otherwise the destination byte operand is set to 0.
+		
+		bt			Copies the designated test bit to EFLAGS.CY.
+		
+		bts			Copies the designated test bit to EFLAGS.CY. The test bit is then set to 1.
+		
+		btr			Copies the designated test bit to EFLAGS.CY. The test bit is then set to 0.
+		
+		btc 		Copies the designated test bit to EFLAGS.CY. The test bit is then set to 0.
+		
+		bsf			Scans the source operand and saves to the destination operand the
+					index of the least-significant bit that is set to 1. If the value of the source
+					operand is zero, EFLAGS.ZF is set to 1; otherwise, EFLAGS.ZF is set to 0.
+		
+		bsr			Scans the source operand and saves to the destination operand the
+					index of the most-significant bit that is set to 1. If the value of the source
+					operand is zero, EFLAGS.ZF is set to 1; otherwise, EFLAGS.ZF is set to 0.
+					
+- String 
+
+	- The string-instruction group contains instructions that perform compares, loads, moves,
+	  scans, and stores of text strings or blocks of memory. All of the string instructions use
+	  register ESI as the source pointer and register EDI as the destination pointer. The string
+	  instructions also increment or decrement these registers depending on the value of the
+	  direction flag (EFLAGS.DF). Repeated execution of a string instruction using register ECX
+	  as a counter is possible with a rep, repe/ repz, or repne / repnz prefix.
+		
+	
+		String Instructions:
+	
+		Mnemonic	Description
+		--------------------------------------------------------------------------------
+		
+		cmpsb		Compares the values at the memory locations pointed to by registers ESI
+		cmpsw		and EDI; sets the status flags to indicate the results.
+		cmpsd
+		
+		lodsb		Loads the value at the memory location pointed to by register ESI into the
+		lodsw		Al, AX, or EAX register. Loads the value at the memory location pointed to 
+		lodsd		by register ESI into the Al, AX, or EAX register.
+		
+		movsb		Copies the value of the memory location specified by register ESI to the
+		movsw		memory location specified by register EDI.
+		movsd		
+
+		stosb		Stores the contents of register AL, AX, or EAX to the memory location
+		stosw		specified by register EDI.
+		stosd
+
+		rep			Repeats the specified string instruction while the condition ECX != 0 is true.
+		
+		repe		Repeats the specified string instruction while the condition ECX != 0 &&
+		repz		ZF == 1 is true.
+		
+		repne		Repeats the specified string instruction while the condition ECX != 0 &&
+		repnz		ZF == 0 is true.
+
+
+- Flag Manipulation
+
+	- The flag-manipulation group contains instructions that can be used to manipulate some
+	  of the status flags in the EFLAGS register.
+		
+	
+		Flag Manipulation Instructions:
+	
+		Mnemonic	Description
+		--------------------------------------------------------------------------------
+		
+		clc			Sets EFLAGS.CY to 0.
+		
+		stc 		Sets EFLAGS.CY to 1.
+		
+		cmc			Toggles the state of EFLAGS.CY.
+		
+		std			Sets EFLAGS.DF to 1.
+		
+		cld			Sets EFLAGS.DF to 0.
+		
+		lahf		Loads register AH with the values of the status flags. The bits of register AH
+					(most significant to least significant) are loaded as follows: EFLAGS.SF,
+					EFLAGS. ZF, 0, EFLAGS.AF, 0, EFLAGS.PF, 1, EFLAGS.CF.
+		
+		sahf		Stores register AH to the status flags. The bits of register AH (most
+					significant to least significant) are stored to the status flags as follows:
+					EFLAGS.SF, EFLAGS.ZF, 0, EFLAGS.AF, 0, EFLAGS.PF, 1, EFLAGS.CF (a zero
+					or one indicate
+		
+		pushfd		Pushes the EFLAGS register onto the stack.
+		
+		popfd		Pops the top most value from the stack and copies it to the EFLAGS
+					register. Note that the reserved bits in the EFLAGS register are not
+					affected by this instruction.
+					
+- Control Transfer
+
+	- The control-transfer group contains instructions that perform jumps, function calls
+	  and returns, and looping constructs.
+	  
+	
+		Control Transfer Instructions:
+	
+		Mnemonic	Description
+		--------------------------------------------------------------------------------
+	
+		jmp			Performs an unconditional jump to the memory location specified by
+					the operand.
+					
+		jcc			Performs a conditional jump to the memory location specified by the
+					operand if the identified condition is true. The cc denotes a conditioncode
+					mnemonic fromTable above.
+		
+		call		Pushes the contents of register EIP onto the stack and then performs
+					an unconditional jump to the memory location that is specified
+					by the operand.
+		
+		ret 		Pops the target address off the stack and then performs an
+					unconditional jump to that address.
+		
+		enter		Creates a stack frame that enables to a function’s parameters and local
+					data by initializing the EBP and ESP registers.
+		
+		leave		Removes the stack frame that was created using an enter instruction
+					by restoring the caller’s EBP and ESP registers.
+					
+		jecxz		Performs a jump to the specified memory location if the condition
+					ECX == 0 is true.
+					
+		loop		Subtracts one from register ECX and jumps to the specified memory
+					location if the condition ECX == 0 is true.
+	
+		loope		Subtracts one from register ECX and jumps to the specified memory
+		loopz		location if the condition ECX != 0 && ZF == 1 is true.
+		
+		loopne		Subtracts one from register ECX and jumps to the specified memory
+		loopnz		location if the condition ECX != 0 && ZF == 0 is true.
+	
+
+- Miscellaneous
+
+	- The miscellaneous group contains instructions that do not fit into one of the preceding
+	  categories.
+	
+	
+		Miscellaneous Instructions:
+	
+		Mnemonic	Description
+		--------------------------------------------------------------------------------
+		
