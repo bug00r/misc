@@ -5,3 +5,15 @@ http://core.tcl.tk/jenglish/gutter/browse.html
 http://core.tcl.tk/tcllib/doc/trunk/embedded/www/toc.html
 
 BWidgets installation
+
+to exe:
+
+Standalone :
+	1. https://wiki.tcl-lang.org/page/How+to+compile+a+TCL+script+into+an+EXE+program
+	2. https://wiki.tcl-lang.org/page/Starpack
+	
+	
+Tutorials:
+
+	https://tkdocs.com/tutorial/firstexample.html
+	https://wiki.tcl-lang.org/page/Tcl+Tutorial+Lesson+0

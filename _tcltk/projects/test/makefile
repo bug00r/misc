@@ -1,6 +1,6 @@
 TCL_BIN=./../../bin_8_6_8/bin/tclsh86.exe
 
-PHONY: tcl array array2 oo sqllite3 tk xml
+PHONY: tcl array array2 oo sqllite3 tk xml tk2
 
 tcl:
 	$(TCL_BIN) $@_test.tcl
@@ -18,6 +18,9 @@ sqllite3:
 	$(TCL_BIN) $@_test.tcl
 	
 tk:
+	$(TCL_BIN) $@_test.tcl
+
+tk2:
 	$(TCL_BIN) $@_test.tcl
 	
 xml:
