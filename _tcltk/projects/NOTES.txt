@@ -17,3 +17,6 @@ Tutorials:
 
 	https://tkdocs.com/tutorial/firstexample.html
 	https://wiki.tcl-lang.org/page/Tcl+Tutorial+Lesson+0
+	
+configure tclxml:
+./configure --enable-64bit --prefix=/c/dev/testplace/github/misc/_tcltk/bin_8_6_8 --with-xml2-config=/c/dev/testplace/github/c/_third_/libxml_bin/bin/xml2-config --with-xslt-config=/c/dev/testplace/github/c/_third_/libxslt_bin/bin/xslt-config --with-tcl=/c/dev/testplace/github/misc/_tcltk/bin_8_6_8/lib
