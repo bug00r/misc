@@ -1,0 +1,41 @@
+
+1. inject xml, text files into js resource template
+    - for text parts 
+        sed -i 's/old-text/new-text/g' input.txt
+    - found sed command here https://unix.stackexchange.com/questions/32908/how-to-insert-the-content-of-a-file-into-another-file-before-a-pattern-marker
+        
+        sed has a function for that, and can do the modification inline:
+
+            sed -i -e '/Pointer/r file1' file2
+        
+        But this puts your Pointer line above the file1. To put it below, delay line output:
+
+        sed -n -i -e '/Pointer/r file1' -e 1x -e '2,${x;p}' -e '${x;p}' file2 
+
+2. Save contenct from Browser as Download
+    - Alternative for below FileAPI ?!
+    - found on version here https://ourcodeworld.com/articles/read/189/how-to-create-a-file-and-generate-a-download-with-javascript-in-the-browser-without-a-server
+
+    Example:
+
+    function download(filename, text) {
+        var element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+        element.setAttribute('download', filename);
+
+        element.style.display = 'none';
+        document.body.appendChild(element);
+
+        element.click();
+
+        document.body.removeChild(element);
+    }
+
+    // Start file download.
+    document.getElementById("dwn-btn").addEventListener("click", function(){
+        // Generate download of hello.txt file with some content
+        var text = document.getElementById("text-val").value;
+        var filename = "hello.txt";
+        
+        download(filename, text);
+    }, false);
