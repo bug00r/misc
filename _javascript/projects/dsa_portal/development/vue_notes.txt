@@ -1,0 +1,2 @@
+Communication between apps:
+    https://vuejs.org/v2/guide/state-management.html
