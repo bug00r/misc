@@ -9,10 +9,13 @@ const temp_dir = path.join(build_dir, "tmp");
 const target_dir = path.join(build_dir, version);
 const target_js_dir = path.join(target_dir, "js");
 const target_css_dir = path.join(target_dir, "css");
+const target_img_dir = path.join(target_dir, "img");
 
 const src_resource_dir = 'resources';
 const src_text_dir = path.join(src_resource_dir, "text");
 const src_html_dir = path.join(src_resource_dir, "html");
+const src_img_dir = path.join(src_resource_dir, "img");
+const src_html_snippet_dir = path.join(src_html_dir, "snippets");
 const src_xml_dir = path.join(src_resource_dir, "xml");
 const src_js_dir = path.join(src_resource_dir, "js");
 const src_css_dir = path.join(src_resource_dir, "css");
@@ -44,7 +47,7 @@ handler.clean = function() {
 
 handler.mkbuild = function() {
 
-    for (var cdir of [build_dir, target_dir, temp_dir, target_js_dir, target_css_dir] ) {
+    for (var cdir of [build_dir, target_dir, temp_dir, target_js_dir, target_css_dir, target_img_dir] ) {
         if ( !fs.existsSync(cdir) ) {
             fs.mkdirSync(cdir, {recursive: true});
         }
@@ -77,6 +80,15 @@ handler.copycss = function() {
     }
 }
 
+handler.copyimg = function() {
+    for (var imgfile of fs.readdirSync(src_img_dir)) {
+        fs.copyFileSync(
+            path.join(src_img_dir, imgfile),
+            path.join(target_img_dir, imgfile)
+        );
+    }
+}
+
 handler.prep_txt = function() {
     var resource = fs.readFileSync(target_resource_js, {encoding : 'utf8'});
     var text = fs.readFileSync(src_text_json, {encoding : 'utf8'});
@@ -94,12 +106,24 @@ handler.prep_xml = function() {
     fs.writeFileSync(target_resource_js, resource);
 }
 
+handler.prep_html = function() {
+    var resource = fs.readFileSync(target_resource_js, {encoding : 'utf8'});
+    for (var htmlfile of fs.readdirSync(src_html_snippet_dir)) {
+        var cur_html = fs.readFileSync(path.join(src_html_snippet_dir, htmlfile) , {encoding : 'utf8'});
+        resource = resource.replace(htmlfile, Buffer.from(cur_html).toString('base64'));
+    }
+
+    fs.writeFileSync(target_resource_js, resource);
+}
+
 handler.build = function() { 
     handler.copyindex();
     handler.copyjs();
     handler.copycss();
+    handler.copyimg();
     handler.prep_txt();
     handler.prep_xml();
+    handler.prep_html();
 }
 
 handler[process.argv[2]]();

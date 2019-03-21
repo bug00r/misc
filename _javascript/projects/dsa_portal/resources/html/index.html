@@ -7,39 +7,64 @@
 
     <title>{dsa.portal.title}</title>
 
-    <!--<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
-    <link type="text/css" rel="stylesheet" href="bootstrap-vue/dist/bootstrap-vue.css"/>-->
+    <link type="text/css" rel="stylesheet" href="css/bulma.min.css"/>
+    <link type="text/css" rel="stylesheet" href="css/portal.css"/>
 </head>
 <body>
 </body>
 
 <div id="dsa_portal">
-    <section class="section">
-            <div class="container">
-                <h1 class="title">
-                    {{ headline }}
-                </h1>
-                <p class="subtitle">
-                    {{ headline }} with <strong>Bulma</strong>!
-                </p>
-            </div>
-            </section>
-    
-  </div>
+    <!--<section class="section">
+            <div class="container">-->
 
+                <nav class="navbar" role="navigation" aria-label="main navigation">
+                    <div class="navbar-brand">
+                        <a class="navbar-item" href="#">
+                            <img id="logo" src="img/logo.png" width="178" height="80" >
+                        </a>
+                        
+                        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                            <span aria-hidden="true"></span>
+                            <span aria-hidden="true"></span>
+                            <span aria-hidden="true"></span>
+                        </a>
+                    </div>
+                    
+                    <div id="navbarBasicExample" class="navbar-menu">
+                        <div class="navbar-start">
+                            <div class="navbar-item has-dropdown is-hoverable">
+                                <a class="navbar-link">
+                                    {{ labels['dsa.portal.tools'] }}
+                                </a>
+                                <div class="navbar-dropdown">
+                                    
+                                    <a @click="open(tool.id)" class="navbar-item" v-for="tool in tools" v-if="tool.enabled">
+                                        {{ labels[tool.name] }}
+                                    </a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+
+                <!--<h4 class="title is-4">
+                        {{ labels['dsa.portal.title'] }}
+                </h4>-->
+
+                <div id="content"></div>
+            
+            <!--</div>
+    </section>-->
+</div>
+
+<script type="application/javascript" src="js/jquery-3.3.1.min.js"></script>
 <script type="application/javascript" src="js/base64js.min.js" charset="utf-8"></script>
 <script type="application/javascript" src="js/resource.js" charset="utf-8"></script>
 <script type="application/javascript" src="js/vue-2.6.9.js" charset="utf-8"></script>
+<script type="application/javascript" src="js/tools.js"  charset="utf-8" ></script>
 <script type="application/javascript" src="js/start.js"  charset="utf-8" ></script>
-
-<!--<script type="application/javascript" src="js/jquery-3.3.1.min.js"></script>
-<script type="application/javascript" src="js/popper.min.js"></script>
-<script type="application/javascript" src="js/tooltip.min.js"></script>
-<script type="application/javascript" src="js/bootstrap.min.js"></script>
-<script type="application/javascript" src="js/start.js"></script>
-<script type="application/javascript" src="js/vue.min.js"></script>
-<script type="application/javascript" src="babel-polyfill/dist/polyfill.js"></script>
-<script type="application/javascript" src="bootstrap-vue/dist/bootstrap-vue.js"></script>
-<script type="application/javascript" src="js/start.js"></script> -->
+<script type="application/javascript" src="js/calc_vue.js"  charset="utf-8" ></script>
+<script type="application/javascript" src="js/lexicon_vue.js"  charset="utf-8" ></script>
 <body>
 </html>

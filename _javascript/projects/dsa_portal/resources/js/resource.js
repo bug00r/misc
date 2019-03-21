@@ -2,7 +2,14 @@ var dsa = dsa || {};
 dsa.resources = dsa.resources || {};
 
 dsa.resources.text = dsa.resources.text || "text_resource";
-dsa.resources.html = dsa.resources.html || {};
+dsa.resources.html = dsa.resources.html || {
+    "calc" : "calc.html",
+    "lexicon" : "lexicon.html"
+};
+
+dsa.resources.html.calc = Base64.decode(dsa.resources.html.calc);
+dsa.resources.html.lexicon = Base64.decode(dsa.resources.html.lexicon);
+
 dsa.resources.xml = dsa.resources.xml || {
     "armor" : "armor.xml",
     "basehero" : "basehero.xml",

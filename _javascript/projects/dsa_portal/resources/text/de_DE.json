@@ -1,4 +1,9 @@
 {
-    "dsa.portal.title": "DSA - Portal",
-    "dsa.portal.headline":"DSA - Toolset"
+    "labels": {
+        "dsa.portal.title": "DSA - Portal",
+        "dsa.portal.headline":"DSA - Toolset",
+        "dsa.portal.tools" : "Tools",
+        "dsa.portal.tool.calc.name" : "TaW-Berechnung",
+        "dsa.portal.tool.lexicon.name" : "Bibliothek"
+    }
 }
