@@ -1,5 +1,38 @@
 <div id="dsa_portal_calc">
-    <h5 class="title is-5">
-        {{ headline }}
-    </h5>
+    <form>
+        <div class="columns is-multiline is-centered">
+            <div class="column is-primary is-full is-centered">
+                <div class="title has-text-centered">{{ labels["dsa.portal.tool.calc.name"] }}</div> 
+                <div class="has-text-centered is-size-4"><b>{{ calcTaw() }}</b>&nbsp;{{labels["dsa.portal.tool.calc.ap"]}}</div>
+            </div>
+            <div class="column">
+                <div class="field">
+                    <label class="label">{{ labels["dsa.portal.tool.calc.column"] }}</label>
+                    <div class="control">
+                        <select class="input" v-model="selected.col" name="tawcol">
+                            <option v-for="(tawcol, index) in tawcols" v-bind:value="index">
+                                    {{ tawcol }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="field">
+                    <label class="label">{{ labels["dsa.portal.tool.calc.from"] }}</label>
+                    <div class="control">
+                        <input class="input" v-model="selected.min" type="number" name="tawmin" v-bind:min="taw.min" v-bind:max="taw.max" />
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="field">
+                    <label class="label">{{ labels["dsa.portal.tool.calc.to"] }}</label>
+                    <div class="control">
+                        <input class="input" v-model="selected.max" type="number" name="tawmax" v-bind:min="taw.min" v-bind:max="taw.max" />
+                    </div>
+                </div>
+            </div>   
+        </div>
+    </form>
 </div>

@@ -4,6 +4,10 @@
         "dsa.portal.headline":"DSA - Toolset",
         "dsa.portal.tools" : "Tools",
         "dsa.portal.tool.calc.name" : "TaW-Berechnung",
-        "dsa.portal.tool.lexicon.name" : "Bibliothek"
+        "dsa.portal.tool.lexicon.name" : "Bibliothek",
+        "dsa.portal.tool.calc.from" : "Von",
+        "dsa.portal.tool.calc.to" : "Bis",
+        "dsa.portal.tool.calc.column" : "Taw-Spalte",
+        "dsa.portal.tool.calc.ap" : "AP's"
     }
 }

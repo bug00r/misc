@@ -1,9 +1,19 @@
-var dsa_portal = new Vue({
+const dsa_portal = new Vue({
     el: '#dsa_portal',
     data: {
       labels: dsa.resources.text.labels,
       tools: dsa.tools,
       instances: {}
+    },
+    mounted: function() {
+
+      $(".navbar-burger").click(function() {
+
+        $(".navbar-burger").toggleClass("is-active");
+        $(".navbar-menu").toggleClass("is-active");
+
+      });
+      
     },
     methods: {
       open: function(tool) {
