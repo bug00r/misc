@@ -46,8 +46,8 @@ dsa.tools.calc.vue = {
   },
   methods: {
     calcTaw: function() {
-        let _min = Number(this.selected.min);
-        let _max = Number(this.selected.max);
+        let _min = Math.max(Number(this.selected.min), this.taw.min);
+        let _max = Math.min(Number(this.selected.max), this.taw.max);
         let range = _max - _min;
         let add = ( range < 0 ? -1 : 1 );
         let result = 0;
