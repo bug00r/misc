@@ -39,3 +39,11 @@
         
         download(filename, text);
     }, false);
+
+
+    CSS selector case insensitive:
+
+    https://stackoverflow.com/questions/5671238/css-selector-case-insensitive-for-attributes/26721521#26721521
+
+    Example
+    "eq[name*='Köcher' i]"
