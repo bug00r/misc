@@ -1,8 +1,39 @@
 <div id="dsa_portal_lexicon">
     <div class="container is-mobile">
-        <div class="columns">
+        <div class="columns is-multiline">
             <div class="column is-primary is-full is-centered">
                 <div class="title has-text-centered">{{ labels["dsa.portal.tool.lexicon.name"] }}</div> 
+            </div>
+            <div class="column">
+                <div class="field">
+                    <label class="label">{{ labels["dsa.portal.tool.lexicon.category"] }}</label>
+                    <div class="control">
+                        <select @change="calcGroups" class="input" v-model="selected.category" name="lexiconcategory">
+                            <option :value="'all'" >{{ labels["dsa.portal.tool.lexicon.all"] }}</option>
+                            <option v-for="category in categories" v-bind:value="category">
+                                    {{ labels[`dsa.portal.tool.lexicon.category.${category}`] }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="field">
+                    <label class="label">{{ labels["dsa.portal.tool.lexicon.group"] }}</label>
+                    <div class="control">
+                        <select @change="calcResult" class="input" v-model="selected.group" name="lexicongroup">
+                            <option :value="'all'" >{{ labels["dsa.portal.tool.lexicon.all"] }}</option>
+                            <option v-for="group in groups" v-bind:value="group.name">
+                                    {{ group.name }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="column is-full is-centered">
+                <p v-for="item in result">
+                    {{ item.name }}
+                </p>
             </div>
         </div>
     </div>

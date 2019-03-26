@@ -8,6 +8,21 @@
         "dsa.portal.tool.calc.from" : "Von",
         "dsa.portal.tool.calc.to" : "Bis",
         "dsa.portal.tool.calc.column" : "Taw-Spalte",
-        "dsa.portal.tool.calc.ap" : "AP's"
+        "dsa.portal.tool.calc.ap" : "AP's",
+        "dsa.portal.tool.lexicon.all":"-- Alle Einträge --",
+        "dsa.portal.tool.lexicon.category.armor":"Rüstungen",
+        "dsa.portal.tool.lexicon.category.basehero":"Basisheld",
+        "dsa.portal.tool.lexicon.category.breeds":"Rassen",
+        "dsa.portal.tool.lexicon.category.creatures":"Tiere und Kreaturen",
+        "dsa.portal.tool.lexicon.category.cultures":"Kulturen",
+        "dsa.portal.tool.lexicon.category.equipments":"Ausrüstung",
+        "dsa.portal.tool.lexicon.category.herbs":"Pflanzen",
+        "dsa.portal.tool.lexicon.category.procontra":"Vor- und Nachteile",
+        "dsa.portal.tool.lexicon.category.professions":"Professionen",
+        "dsa.portal.tool.lexicon.category.specialabilities":"Sonderfertigkeiten",
+        "dsa.portal.tool.lexicon.category.spells":"Zauber",
+        "dsa.portal.tool.lexicon.category.talents":"Talente",
+        "dsa.portal.tool.lexicon.category.towns":"Städte",
+        "dsa.portal.tool.lexicon.category.weapons":"Waffen"
     }
 }
