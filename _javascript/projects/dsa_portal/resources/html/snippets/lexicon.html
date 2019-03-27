@@ -30,10 +30,45 @@
                     </div>
                 </div>
             </div>
+            <div class="column">
+                <div class="field">
+                    <label class="label">{{ labels["dsa.portal.tool.lexicon.filter"] }}</label>
+                    <div class="control">
+                        <input @keyup="calcResult" class="input" type="text" placeholder="filter" v-model="filter" />
+                    </div>
+                </div>
+            </div>
             <div class="column is-full is-centered">
-                <p v-for="item in result">
-                    {{ item.name }}
-                </p>
+                <table class="table is-hoverable">
+                    <thead>
+                        <th><abbr :title="labels['dsa.portal.tool.lexicon.result.name']">{{labels['dsa.portal.tool.lexicon.result.position']}}</abbr></th>
+                        <th><abbr :title="labels['dsa.portal.tool.lexicon.result.name']">{{labels['dsa.portal.tool.lexicon.result.name']}}</abbr></th>
+                    </thead>
+                    <tfoot>
+                        <th><abbr :title="labels['dsa.portal.tool.lexicon.result.name']">{{labels['dsa.portal.tool.lexicon.result.position']}}</abbr></th>
+                        <th><abbr :title="labels['dsa.portal.tool.lexicon.result.name']">{{labels['dsa.portal.tool.lexicon.result.name']}}</abbr></th>
+                    </tfoot>
+                    <tbody>
+                        <tr v-for="(item, index) in result">
+                            <th>{{index + 1}}</th>
+                            <td><a @click="selectResult" :data-index="index" href="#" >{{ item.name }}</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal is-clipped" v-bind:class="{ 'is-active' : modal.visible }">
+                <div class="modal-background"></div>
+                <div class="modal-card">
+                    <header class="modal-card-head">
+                    <div class="modal-card-title modalcuttitle">{{modal.title}}</div>
+                    <button @click="closeModal" class="delete" aria-label="close"></button>
+                    </header>
+                    <section class="modal-card-body">
+                        <component v-bind:is="modal.template" v-bind:item="selectedresult" v-bind:labels="labels"></component>
+                    </section>
+                    <footer class="modal-card-foot">
+                    </footer>
+                </div>
             </div>
         </div>
     </div>

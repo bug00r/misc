@@ -1,5 +1,25 @@
 dsa.tools.lexicon.vue = {
   el: '#dsa_portal_lexicon',
+  components: {
+    'eq': {
+      /*data: function() {
+        return {
+          item: dsa_portal.$data.instances.lexicon.vue.$data.selectedresult
+        }
+      },*/
+      props: ['item', 'labels'],
+      template: dsa.resources.html.eq
+    },
+    'default': {
+      /*data: function() {
+        return {
+          item: dsa_portal.$data.instances.lexicon.vue.$data.selectedresult
+        }
+      },*/
+      props: ['item', 'labels'],
+      template: dsa.resources.html.default
+    }
+  },
   data: {
     labels: dsa.resources.text.labels,
     selected: {
@@ -9,7 +29,13 @@ dsa.tools.lexicon.vue = {
     categories: [],
     groups: [],
     filter: "",
-    result: []
+    result: [],
+    modal: {
+      template: 'default',
+      visible: false,
+      title: ""
+    },
+    selectedresult: null
   },
   mounted: function() {
     this.calcCategories();
@@ -47,6 +73,8 @@ dsa.tools.lexicon.vue = {
     },
     calcGroups: function() {
 
+      this.result = [];
+
       this.groups = [];
 
       this.selected.group = 'all';
@@ -77,7 +105,30 @@ dsa.tools.lexicon.vue = {
           }
        }
       }
-      console.log(this.result);
+    },
+    selectResult: function(event) {
+      let index = $(event.target).data("index");
+      let item = this.result[index];
+      let tag = item.node.tagName;
+      
+      this.modal.title = item.name;
+      
+      this.selectedresult = item;
+
+      //this.modal.content = `<${tag}></${tag}>`;
+      let template = 'default';
+
+      if ( tag in dsa.resources.html ) {
+        template = tag;
+      }
+
+      this.modal.template = template;
+
+      this.modal.visible = true;
+      //alert(`select: ${item.name} as Tag: ${tag}`);
+    },
+    closeModal: function() {
+      this.modal.visible = false;
     }
   }
 }

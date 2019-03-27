@@ -4,11 +4,15 @@ dsa.resources = dsa.resources || {};
 dsa.resources.text = dsa.resources.text || "text_resource";
 dsa.resources.html = dsa.resources.html || {
     "calc" : "calc.html",
-    "lexicon" : "lexicon.html"
+    "lexicon" : "lexicon.html",
+    "eq" : "eq.html",
+    "default": "default.html"
 };
 
 dsa.resources.html.calc = Base64.decode(dsa.resources.html.calc);
 dsa.resources.html.lexicon = Base64.decode(dsa.resources.html.lexicon);
+dsa.resources.html.eq = Base64.decode(dsa.resources.html.eq);
+dsa.resources.html.default = Base64.decode(dsa.resources.html.default);
 
 dsa.resources.xml = dsa.resources.xml || {
     "armor" : "armor.xml",

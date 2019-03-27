@@ -23,6 +23,14 @@
         "dsa.portal.tool.lexicon.category.spells":"Zauber",
         "dsa.portal.tool.lexicon.category.talents":"Talente",
         "dsa.portal.tool.lexicon.category.towns":"Städte",
-        "dsa.portal.tool.lexicon.category.weapons":"Waffen"
+        "dsa.portal.tool.lexicon.category.weapons":"Waffen",
+        "dsa.portal.tool.lexicon.category" : "Kategorie",
+        "dsa.portal.tool.lexicon.group" : "Gruppe",
+        "dsa.portal.tool.lexicon.filter" : "Filter",
+        "dsa.portal.tool.lexicon.result.name" : "Name",
+        "dsa.portal.tool.lexicon.result.position" : "Pos.",
+        "dsa.portal.tool.lexicon.result.weight": "Gewicht",
+        "dsa.portal.tool.lexicon.result.price": "Preis",
+        "dsa.portal.tool.lexicon.result.ounce": "Unze(n)"
     }
 }

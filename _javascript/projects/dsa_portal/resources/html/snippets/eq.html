@@ -1,0 +1,14 @@
+<div v-if="item">
+        <table class="table is-hoverable">
+            <tbody>
+                <tr>
+                    <td><b>{{labels['dsa.portal.tool.lexicon.result.price']}}</b></td>
+                    <td>{{item.node.getAttribute('price')}}&nbsp;{{item.node.getAttribute('price_unit')}}</td>
+                </tr>
+                <tr>
+                    <td><b>{{labels['dsa.portal.tool.lexicon.result.weight']}}</b></td>
+                    <td>{{item.node.getAttribute('weight')}}&nbsp;{{labels['dsa.portal.tool.lexicon.result.ounce']}}</td>
+                </tr>
+            </tbody>
+        </table>
+</div>
