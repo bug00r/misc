@@ -31,6 +31,11 @@
         "dsa.portal.tool.lexicon.result.position" : "Pos.",
         "dsa.portal.tool.lexicon.result.weight": "Gewicht",
         "dsa.portal.tool.lexicon.result.price": "Preis",
-        "dsa.portal.tool.lexicon.result.ounce": "Unze(n)"
+        "dsa.portal.tool.lexicon.result.ounce": "Unze(n)",
+        "dsa.portal.tool.lexicon.result.talent.melee": "Fernkampf",
+        "dsa.portal.tool.lexicon.result.talent.base": "Basistalent",
+        "dsa.portal.tool.lexicon.result.talent.test": "Probe",
+        "dsa.portal.tool.lexicon.result.talent.scope": "Bereich",
+        "dsa.portal.tool.lexicon.result.talent.gp": "GP"
     }
 }

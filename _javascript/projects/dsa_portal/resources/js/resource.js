@@ -6,13 +6,16 @@ dsa.resources.html = dsa.resources.html || {
     "calc" : "calc.html",
     "lexicon" : "lexicon.html",
     "eq" : "eq.html",
+    "talent" : "talent.html",
+    "breed" : "breed.html",
     "default": "default.html"
 };
 
 dsa.resources.html.calc = Base64.decode(dsa.resources.html.calc);
 dsa.resources.html.lexicon = Base64.decode(dsa.resources.html.lexicon);
 dsa.resources.html.eq = Base64.decode(dsa.resources.html.eq);
-dsa.resources.html.default = Base64.decode(dsa.resources.html.default);
+dsa.resources.html.talent = Base64.decode(dsa.resources.html.talent);
+dsa.resources.html.breed = Base64.decode(dsa.resources.html.breed);
 
 dsa.resources.xml = dsa.resources.xml || {
     "armor" : "armor.xml",

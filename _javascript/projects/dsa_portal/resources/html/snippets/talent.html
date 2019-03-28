@@ -1,0 +1,22 @@
+<div v-if="item">
+        <table class="table is-hoverable">
+                <tbody>
+                    <tr>
+                        <td><b>{{labels['dsa.portal.tool.lexicon.result.talent.scope']}}</b></td>
+                        <td>{{item.node.parentNode.getAttribute('name')}}</td>
+                        </tr>
+                    <tr>
+                        <td><b>{{labels['dsa.portal.tool.lexicon.category']}}</b></td>
+                        <td>{{item.node.getAttribute('inc')}}&nbsp;
+                            <b v-if="item.node.getAttribute('usage') === 'distance'">({{labels['dsa.portal.tool.lexicon.result.talent.melee']}})</b>
+                            <b v-if="item.node.getAttribute('type') === 'base'">({{labels['dsa.portal.tool.lexicon.result.talent.base']}})</b>
+                        </td>
+                    </tr>
+                    <tr v-if="item.node.getAttribute('test')">
+                        <td><b>{{labels['dsa.portal.tool.lexicon.result.talent.test']}}</b></td>
+                        <td>{{item.node.getAttribute('test')}}</td>
+                    </tr>
+                </tbody>
+        </table>
+</div>
+

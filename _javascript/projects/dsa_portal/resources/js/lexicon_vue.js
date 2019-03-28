@@ -5,6 +5,22 @@ dsa.tools.lexicon.vue = {
       props: ['item', 'labels'],
       template: dsa.resources.html.eq
     },
+    'talent': {
+      props: ['item', 'labels'],
+      template: dsa.resources.html.talent
+    },
+    'breed': {
+      methods: {
+        get: function(element, child_tag_name) {
+          return element.getElementsByTagName(child_tag_name);
+        },
+        attr: function(elment, attributename) {
+          return elment.getAttribute(attributename);
+        }
+      },
+      props: ['item', 'labels'],
+      template: dsa.resources.html.breed
+    },
     'default': {
       props: ['item', 'labels'],
       template: dsa.resources.html.default
