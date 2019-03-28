@@ -1,6 +1,6 @@
 <div id="dsa_portal_lexicon">
     <div class="container is-mobile">
-        <div class="columns is-multiline">
+        <div class="columns is-multiline is-centered">
             <div class="column is-primary is-full is-centered">
                 <div class="title has-text-centered">{{ labels["dsa.portal.tool.lexicon.name"] }}</div> 
             </div>
@@ -37,8 +37,9 @@
                         <input @keyup="calcResult" class="input" type="text" placeholder="filter" v-model="filter" />
                     </div>
                 </div>
-            </div>
-            <div class="column is-full is-centered">
+            </div>  
+        </div>
+        <div class="container is-centered">
                 <table class="table is-hoverable">
                     <thead>
                         <th><abbr :title="labels['dsa.portal.tool.lexicon.result.name']">{{labels['dsa.portal.tool.lexicon.result.position']}}</abbr></th>
@@ -51,7 +52,9 @@
                     <tbody>
                         <tr v-for="(item, index) in result">
                             <th>{{index + 1}}</th>
-                            <td><a @click="selectResult" :data-index="index" href="#" >{{ item.name }}</a></td>
+                            <td @click="selectResult" :data-index="index"><a @click="selectResult" :data-index="index" href="#" >{{ item.name }}
+                                <b @click="selectResult" :data-index="index" v-if="selected.category === 'all'">({{ labels[`dsa.portal.tool.lexicon.category.${item.category}`] }})</b></a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -70,7 +73,6 @@
                     </footer>
                 </div>
             </div>
-        </div>
     </div>
 </div>
 

@@ -2,20 +2,10 @@ dsa.tools.lexicon.vue = {
   el: '#dsa_portal_lexicon',
   components: {
     'eq': {
-      /*data: function() {
-        return {
-          item: dsa_portal.$data.instances.lexicon.vue.$data.selectedresult
-        }
-      },*/
       props: ['item', 'labels'],
       template: dsa.resources.html.eq
     },
     'default': {
-      /*data: function() {
-        return {
-          item: dsa_portal.$data.instances.lexicon.vue.$data.selectedresult
-        }
-      },*/
       props: ['item', 'labels'],
       template: dsa.resources.html.default
     }
@@ -60,12 +50,14 @@ dsa.tools.lexicon.vue = {
 
       let groups = []
       for (let category of categories) {
+        let pattern = null;
         if ( this.selected.group === 'all' ) {
-          for(let group of dsa.resources.xml[category].querySelectorAll("group")) {
-            groups.push({name: group.getAttribute("name")});
-          }
+          pattern = "group"
         } else {
-          groups.push({name: this.selected.group});
+          pattern = `group[name='${this.selected.group}']`;
+        }
+        for(let group of dsa.resources.xml[category].querySelectorAll(pattern)) {
+          groups.push({name: group.getAttribute("name"), category: category});
         }
       }
 
@@ -80,6 +72,8 @@ dsa.tools.lexicon.vue = {
       this.selected.group = 'all';
 
       this.groups = this.getSelectedGroups();
+
+      this.calcResult();
     },
     calcCategories: function() {
       for ( let category in dsa.resources.xml ) {
@@ -94,17 +88,16 @@ dsa.tools.lexicon.vue = {
 
       let groups = this.getSelectedGroups();
 
-      for (let category of categories) {
-        for (let group of groups) {          
-          let pattern = `group[name='${group.name}'] > *[name*='${this.filter}' i]`;
-          if (!!!this.filter) {
-            pattern = `group[name='${group.name}'] > *:not([name*='${this.filter}' i])`;
-          }
-          for(let item of dsa.resources.xml[category].querySelectorAll(pattern)) {
-            this.result.push({name: item.getAttribute("name"), node: item});
-          }
-       }
+      for (let group of groups) {          
+        let pattern = `group[name='${group.name}'] > *[name*='${this.filter}' i]`;
+        if (!!!this.filter) {
+          pattern = `group[name='${group.name}'] > *:not([name*='*' i])`;
+        }
+        for(let item of dsa.resources.xml[group.category].querySelectorAll(pattern)) {
+          this.result.push({name: item.getAttribute("name"), node: item, category: group.category});
+        }
       }
+
     },
     selectResult: function(event) {
       let index = $(event.target).data("index");
@@ -115,7 +108,6 @@ dsa.tools.lexicon.vue = {
       
       this.selectedresult = item;
 
-      //this.modal.content = `<${tag}></${tag}>`;
       let template = 'default';
 
       if ( tag in dsa.resources.html ) {
@@ -125,7 +117,7 @@ dsa.tools.lexicon.vue = {
       this.modal.template = template;
 
       this.modal.visible = true;
-      //alert(`select: ${item.name} as Tag: ${tag}`);
+
     },
     closeModal: function() {
       this.modal.visible = false;
