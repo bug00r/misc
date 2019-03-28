@@ -5,6 +5,71 @@
                         <td><b>{{labels['dsa.portal.tool.lexicon.result.talent.gp']}}</b></td>
                         <td>{{ attr(get(item.node, 'gp')[0], 'value') }}</td>
                     </tr>
+                    <tr v-for="colors of get(get(item.node, 'colortypes')[0], 'colors')" >
+                        <td><b>{{ attr(colors, 'name') }}</b></td>
+                        <td>
+                            <template v-for="color of get(colors, 'color')">
+                                {{ attr(color, 'name') }}&nbsp;({{ attr(color, 'value') }})
+                            </template>
+                        </td>
+                    </tr>
+                    <!--
+                        <body-height name="Körpergröße" value="1.6" die="2w20" />
+			            <body-weight name="Gewicht" value="-100" type="Stein" />
+                    -->
+                    <tr>
+                        <td><b>{{ attr(get(item.node, 'body-height')[0], 'name') }}</b></td>
+                        <td>{{ attr(get(item.node, 'body-height')[0], 'value') }}&nbsp;+&nbsp;{{ attr(get(item.node, 'body-height')[0], 'die') }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>{{ attr(get(item.node, 'body-weight')[0], 'name') }}</b></td>
+                        <td>{{ attr(get(item.node, 'body-height')[0], 'name') }}
+                            {{ attr(get(item.node, 'body-weight')[0], 'value') }}&nbsp;
+                            {{ attr(get(item.node, 'body-weight')[0], 'type') }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>{{labels['dsa.portal.tool.lexicon.result.breed.mods']}}</b></td>
+                        <td>
+                            <template v-for="mod of get(item.node, 'mods')[0].children">
+                                    <b>{{ attr(mod, 'name') }}</b>:&nbsp;{{attr(mod, 'value')}}
+                            </template>
+                        </td>
+                    </tr>
+                    <tr v-for="pros of get(item.node, 'pros')"> 
+                        <td><b>{{ attr(pros, 'name') }}</b></td>
+                        <td>
+                            <table class="table is-hoverable">
+                                <tbody>
+                                    <tr v-for="protype of pros.children">
+                                        <td><b>{{labels[`dsa.portal.tool.lexicon.result.breed.protype.${protype.tagName}`]}}</b></td>
+                                        <td>
+                                            <template v-for="(pro, index) of protype.children">
+                                                    {{ attr(pro, 'name') }}<template v-if="(index+1) != protype.children.length">,</template>
+                                            </template>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>    
+                    </tr>
+                    <tr v-for="contras of get(item.node, 'contras')"> 
+                            <td><b>{{ attr(contras, 'name') }}</b></td>
+                            <td>
+                                <table class="table is-hoverable">
+                                    <tbody>
+                                        <tr v-for="contratype of contras.children">
+                                            <td><b>{{labels[`dsa.portal.tool.lexicon.result.breed.protype.${contratype.tagName}`]}}</b></td>
+                                            <td>
+                                                <template v-for="(contra, index) of contratype.children">
+                                                        {{ attr(contra, 'name') }}<template v-if="(index+1) != contratype.children.length">,</template>
+                                                </template>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>    
+                        </tr>
                     <!--<tr>
                         <td><b>{{labels['dsa.portal.tool.lexicon.category']}}</b></td>
                         <td>{{item.node.getAttribute('inc')}}&nbsp;

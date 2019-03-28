@@ -36,6 +36,10 @@
         "dsa.portal.tool.lexicon.result.talent.base": "Basistalent",
         "dsa.portal.tool.lexicon.result.talent.test": "Probe",
         "dsa.portal.tool.lexicon.result.talent.scope": "Bereich",
-        "dsa.portal.tool.lexicon.result.talent.gp": "GP"
+        "dsa.portal.tool.lexicon.result.talent.gp": "GP",
+        "dsa.portal.tool.lexicon.result.breed.mods" : "Modifikatoren",
+        "dsa.portal.tool.lexicon.result.breed.protype.improper" : "Ungeeignet",
+        "dsa.portal.tool.lexicon.result.breed.protype.automatic" : "Automatisch",
+        "dsa.portal.tool.lexicon.result.breed.protype.recommended" : "Empfohlen"
     }
 }

@@ -238,14 +238,12 @@
 			<body-height name="Körpergröße" value="1.55" die="2w20" />
 			<body-weight name="Gewicht" value="-110" type="Stein" />
 			<mods>
-				<le><mod name="LeP" value="9" /></le>
-				<au><mod name="AuP" value="12" /></au>
-				<mr><mod name="MR" value="-5" /></mr>
-				<attributes>
-					<mod name="IN" value="1" />
-					<mod name="KO" value="1" />
-					<mod name="KK" value="1" />
-				</attributes>
+				<le name="LeP" value="9" />
+				<au name="AuP" value="12" />
+				<mr name="MR" value="-5" />
+				<in name="IN" value="1" />
+				<ko name="KO" value="1" />
+				<kk name="KK" value="1" />
 				<talents>
 					<talentgroup name="Körper" >
 						<mod name="Schleichen" value="+1" />
