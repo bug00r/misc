@@ -8,32 +8,56 @@
             </div>
             <div class="column">
                 <div class="field">
+                    <label class="label">{{ labels["dsa.portal.tool.calc.talent"] }}</label>
+                
+                    <div class="control select">
+                        <select @change="selectTalent" class="input" v-model="selected.talent" name="tawtalent">
+                            <option value="-1" disabled selected>{{labels['dsa.portal.tool.calc.choosetalent']}}</option>
+                            <option v-for="(talent, index) in talents" v-bind:value="index">
+                                    {{ talent.getAttribute('name') }}
+                            </option>
+                        </select>
+                    </div>
+                  
+                </div>
+            </div>
+            <div class="column">
+                <div class="field">
+                 
                     <label class="label">{{ labels["dsa.portal.tool.calc.column"] }}</label>
+                   
                     <div class="control">
-                        <select class="input" v-model="selected.col" name="tawcol">
+                        <select @change="selectCategory" class="input" v-model="selected.col" name="tawcol">
                             <option v-for="(tawcol, index) in tawcols" v-bind:value="index">
                                     {{ tawcol }}
                             </option>
                         </select>
                     </div>
+                  
                 </div>
             </div>
             <div class="column">
                 <div class="field">
+         
                     <label class="label">{{ labels["dsa.portal.tool.calc.from"] }}</label>
+                
+                    
                     <div class="control">
                         <input class="input" v-model="selected.min" type="number" name="tawmin" v-bind:min="taw.min" v-bind:max="taw.max" />
                     </div>
+                
                 </div>
             </div>
             <div class="column">
                 <div class="field">
                     <label class="label">{{ labels["dsa.portal.tool.calc.to"] }}</label>
+                    
                     <div class="control">
                         <input class="input" v-model="selected.max" type="number" name="tawmax" v-bind:min="taw.min" v-bind:max="taw.max" />
                     </div>
+                   
                 </div>
-            </div>   
+            </div>
         </div>
     </form>
     </div>

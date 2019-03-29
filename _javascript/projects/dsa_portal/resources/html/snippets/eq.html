@@ -3,7 +3,12 @@
             <tbody>
                 <tr>
                     <td><b>{{labels['dsa.portal.tool.lexicon.result.price']}}</b></td>
-                    <td>{{item.node.getAttribute('price')}}&nbsp;{{item.node.getAttribute('price_unit')}}</td>
+                    <td>{{item.node.getAttribute('price')}}&nbsp;{{item.node.getAttribute('price_unit')}}
+                        <template v-if="item.node.getAttribute('s_price')">
+                            <br /><b>{{labels['dsa.portal.tool.lexicon.result.special']}}</b>:&nbsp;
+                            {{item.node.getAttribute('s_price')}}&nbsp;{{item.node.getAttribute('s_price_unit')}}
+                        </template>
+                    </td>
                 </tr>
                 <tr>
                     <td><b>{{labels['dsa.portal.tool.lexicon.result.weight']}}</b></td>

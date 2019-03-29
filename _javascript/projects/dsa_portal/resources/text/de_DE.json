@@ -9,6 +9,8 @@
         "dsa.portal.tool.calc.to" : "Bis",
         "dsa.portal.tool.calc.column" : "Taw-Spalte",
         "dsa.portal.tool.calc.ap" : "AP's",
+        "dsa.portal.tool.calc.talent" : "Talent",
+        "dsa.portal.tool.calc.choosetalent" : "Talent auswählen",
         "dsa.portal.tool.lexicon.all":"-- Alle Einträge --",
         "dsa.portal.tool.lexicon.category.armor":"Rüstungen",
         "dsa.portal.tool.lexicon.category.basehero":"Basisheld",
@@ -27,6 +29,7 @@
         "dsa.portal.tool.lexicon.category" : "Kategorie",
         "dsa.portal.tool.lexicon.group" : "Gruppe",
         "dsa.portal.tool.lexicon.filter" : "Filter",
+        "dsa.portal.tool.lexicon.result.special" : "Spezielle Variante",
         "dsa.portal.tool.lexicon.result.name" : "Name",
         "dsa.portal.tool.lexicon.result.position" : "Pos.",
         "dsa.portal.tool.lexicon.result.weight": "Gewicht",
@@ -40,6 +43,10 @@
         "dsa.portal.tool.lexicon.result.breed.mods" : "Modifikatoren",
         "dsa.portal.tool.lexicon.result.breed.protype.improper" : "Ungeeignet",
         "dsa.portal.tool.lexicon.result.breed.protype.automatic" : "Automatisch",
-        "dsa.portal.tool.lexicon.result.breed.protype.recommended" : "Empfohlen"
+        "dsa.portal.tool.lexicon.result.breed.protype.recommended" : "Empfohlen",
+        "dsa.portal.tool.lexicon.result.breed.culture.common" : "Üblich",
+        "dsa.portal.tool.lexicon.result.breed.culture.possible" : "Möglich",
+        "dsa.portal.tool.lexicon.result.breed.specialability" : "Sonderfertigkeiten",
+        "dsa.portal.tool.lexicon.result.breed.cheaper" : "Verbilligt"
     }
 }

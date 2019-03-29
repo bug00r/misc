@@ -158,10 +158,10 @@
 			<body-height name="Körpergröße" version="Gjalskerländer" value="1.73" die="2w20" />
 			<body-weight name="Gewicht" value="-95" type="Stein" />
 			<mods>
-				<le><mod name="LeP" value="10" /></le>
+				<le name="LeP" value="10" />
 
-				<au><mod name="AuP" value="10" /></au>
-				<mr><mod name="MR" value="-4" /></mr>
+				<au name="AuP" value="10" />
+				<mr name="MR" value="-4" />
 				<attributes>
 					<mod name="MU" value="1" />
 					<mod name="KO" value="1" />
@@ -241,9 +241,11 @@
 				<le name="LeP" value="9" />
 				<au name="AuP" value="12" />
 				<mr name="MR" value="-5" />
-				<in name="IN" value="1" />
-				<ko name="KO" value="1" />
-				<kk name="KK" value="1" />
+				<attributes>
+					<attribute name="IN" value="1" />
+					<attribute name="KO" value="1" />
+					<attribute name="KK" value="1" />
+				</attributes>
 				<talents>
 					<talentgroup name="Körper" >
 						<mod name="Schleichen" value="+1" />
@@ -2660,7 +2662,7 @@
 					<attribute name="GE" value="+2" />
 					<attribute name="KK" value="-1" />
 				</attributes>
-				<ini-base name="Ini-Basiswert +2"  value="2" />
+				<ini-base name="Ini-Basiswert"  value="2" />
 				<talents>
 					<talentgroup name="Körper" >
 						<talent name="Klettern" value="2"/>
@@ -2805,7 +2807,7 @@
 					<attribute name="KO" value="+1" />
 					<attribute name="KK" value="-1" />
 				</attributes>
-				<ini-base name="Ini-Basiswert +2"  value="2" />
+				<ini-base name="Ini-Basiswert"  value="2" />
 				<talents>
 					<talentgroup name="Kampf" >
 						<talent name="Raufen" value="1"/>
@@ -2961,7 +2963,7 @@
 					<attribute name="GE" value="+1" />
 					<attribute name="KK" value="-1" />
 				</attributes>
-				<ini-base name="Ini-Basiswert +2"  value="2" />
+				<ini-base name="Ini-Basiswert"  value="2" />
 				<talents>
 					<talentgroup name="Kampf" >
 						<talent name="Raufen" value="1"/>
@@ -3258,6 +3260,7 @@
 				<le name="LE-Mod" value="8" type="LeP" />
 				<au name="AU-Mod" value="7" type="AuP" />
 				<mr name="MR" value="-2" />
+				<ini-base name="Ini-Basis"  value="2" />
 				<attributes name="Eingenschafts-Modifikatoren" >
 					<attribute name="MU" value="-1" />
 					<attribute name="IN" value="+2" />
@@ -3265,7 +3268,6 @@
 					<attribute name="GE" value="+1" />
 					<attribute name="KK" value="-1" />
 				</attributes>
-				<ini-base name="Ini-Basiswert +2"  value="2" />
 				<talents>
 					<talentgroup name="Körper" >
 						<talent name="Körperbeherrschung" value="1"/>

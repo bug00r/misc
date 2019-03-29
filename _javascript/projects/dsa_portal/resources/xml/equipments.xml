@@ -306,8 +306,8 @@
 		<eq name="Nachtmütze"				weight="4"	price="2" 	price_unit="H"	s_price="2"  s_price_unit="S" />
 		<eq name="Hausmantel"				weight="30"	price="5" 	price_unit="S"	s_price="10" s_price_unit="D" />
 		<eq name="Hemd, Bluse, Leinen"			weight="10"	price="8" 	price_unit="H"	s_price="8"  s_price_unit="S" />
-		<eq name="Hemd, Wolle2"				weight="15"	price="8" 	price_unit="H"	s_price="8"  s_price_unit="S" />
-		<eq name="Hemd, Bausch2"			weight="8"	price="2" 	price_unit="S"	s_price="2"  s_price_unit="D" />
+		<eq name="Hemd, Wolle"				weight="15"	price="8" 	price_unit="H"	s_price="8"  s_price_unit="S" />
+		<eq name="Hemd, Bausch"			weight="8"	price="2" 	price_unit="S"	s_price="2"  s_price_unit="D" />
 		<eq name="Hemd, Seide"				weight="5"	price="12" 	price_unit="S" 	s_price="8"  s_price_unit="D" />
 		<eq name="Jacke, Wams, Leinen"		weight="30"	price="2" 	price_unit="S"	s_price="1"  s_price_unit="D" />
 		<eq name="Jacke, Wams, Wolle"		weight="40"	price="2" 	price_unit="S"	s_price="1"  s_price_unit="D" />
@@ -618,7 +618,7 @@
 		<eq name="Belmart"							weight="-" price="9"  price_unit="S" />		
 		<eq name="Carlog"							weight="-" price="5"  price_unit="S" />		
 		<eq name="Chonchinis"						weight="-" price="4"  price_unit="S" />		
-		<eq name="Donf"							weight="-" price="3"  price_unit="S" />		
+		<eq name="Donf"								weight="-" price="3"  price_unit="S" />		
 		<eq name="Egelschreck"			        	weight="-" price="8"  price_unit="H" />		
 		<eq name="Finage"				        	weight="-" price="6"  price_unit="S" />		
 		<eq name="Gulmond"				        	weight="-" price="8"  price_unit="S" />	

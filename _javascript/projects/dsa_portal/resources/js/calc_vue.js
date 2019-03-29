@@ -3,9 +3,11 @@ dsa.tools.calc.vue = {
   data: {
     labels: dsa.resources.text.labels,
     tawcols : ["A*", "A", "B", "C", "D", "E", "F", "G", "H"],
+    tawcolobj : {},
     taw: { min: -3, max: 31},
-    selected: { col: 0, min: -3, max: -3},
+    selected: { col: 0, min: -3, max: -3, talent:""},
     coloffset : 3,
+    talents: [],
     tawvalues: [
       5,    5,    10,   15,    20,    25,    40,    50,   100,
       5,    5,    10,   15,    20,    25,    40,    50,   100,
@@ -44,6 +46,13 @@ dsa.tools.calc.vue = {
       48,   50,   100,  150,   200,   250,   375,   500,   1000
     ]
   },
+  mounted: function() {
+    this.talents = dsa.resources.xml.talents.querySelectorAll('talent')
+    
+    for ( const [i, value] of this.tawcols.entries() ) {
+      this.tawcolobj[value] = i;
+    }
+  },
   methods: {
     calcTaw: function() {
         let _min = Math.max(Number(this.selected.min), this.taw.min);
@@ -60,6 +69,14 @@ dsa.tools.calc.vue = {
         }
 
         return result;
+    },
+    selectCategory: function() {
+      this.selected.talent = "-1";
+    },
+    selectTalent : function(event) {
+      let index = $(event.target).val();
+      let category = this.talents[index].getAttribute('inc');
+      this.selected.col = this.tawcolobj[category];
     }
   }
 }

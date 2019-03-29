@@ -13,10 +13,6 @@
                             </template>
                         </td>
                     </tr>
-                    <!--
-                        <body-height name="Körpergröße" value="1.6" die="2w20" />
-			            <body-weight name="Gewicht" value="-100" type="Stein" />
-                    -->
                     <tr>
                         <td><b>{{ attr(get(item.node, 'body-height')[0], 'name') }}</b></td>
                         <td>{{ attr(get(item.node, 'body-height')[0], 'value') }}&nbsp;+&nbsp;{{ attr(get(item.node, 'body-height')[0], 'die') }}</td>
@@ -31,8 +27,28 @@
                     <tr>
                         <td><b>{{labels['dsa.portal.tool.lexicon.result.breed.mods']}}</b></td>
                         <td>
-                            <template v-for="mod of get(item.node, 'mods')[0].children">
-                                    <b>{{ attr(mod, 'name') }}</b>:&nbsp;{{attr(mod, 'value')}}
+                            <template v-for="mods of get(item.node, 'mods')">
+                                    <template v-for="(mod, index) of mods.children">
+                                            
+                                        <template v-if="mod.tagName === 'attributes'">
+                                            <br/>
+                                            <template v-for="(attribute, index) of mod.children">
+                                                <b>{{ attr(attribute, 'name') }}</b>:&nbsp;{{ attr(attribute, 'value') }}<template v-if="(index+1) != mod.children.length">,</template>
+                                            </template>
+                                        </template>
+                                        <template v-else-if="mod.tagName === 'talents'">
+                                            <template v-for="(talentgroup, index) of mod.children">
+                                                <br/>
+                                                <b>{{ attr(talentgroup, 'name') }}</b>:<br/>
+                                                <template v-for="(talent, index) of talentgroup.children">
+                                                    {{ attr(talent, 'name') }}:&nbsp;{{ attr(talent, 'value') }}<template v-if="(index+1) != talentgroup.children.length">,</template>
+                                                </template>
+                                            </template>
+                                        </template>
+                                        <template v-else>          
+                                            <b>{{ attr(mod, 'name') }}</b>:&nbsp;{{ attr(mod, 'value') }}<template v-if="(index+1) != mods.children.length">,</template>
+                                        </template>
+                                    </template>
                             </template>
                         </td>
                     </tr>
@@ -46,6 +62,13 @@
                                         <td>
                                             <template v-for="(pro, index) of protype.children">
                                                     {{ attr(pro, 'name') }}<template v-if="(index+1) != protype.children.length">,</template>
+                                                    <template v-if="pro.children.length > 0">
+                                                        (
+                                                            <template v-for="(proopt, index) of pro.children">
+                                                                {{ attr(proopt, 'name') }}<template v-if="(index+1) != pro.children.length">,</template>
+                                                            </template>
+                                                        )
+                                                    </template>                                            
                                             </template>
                                         </td>
                                     </tr>
@@ -54,33 +77,62 @@
                         </td>    
                     </tr>
                     <tr v-for="contras of get(item.node, 'contras')"> 
-                            <td><b>{{ attr(contras, 'name') }}</b></td>
-                            <td>
-                                <table class="table is-hoverable">
-                                    <tbody>
-                                        <tr v-for="contratype of contras.children">
-                                            <td><b>{{labels[`dsa.portal.tool.lexicon.result.breed.protype.${contratype.tagName}`]}}</b></td>
-                                            <td>
-                                                <template v-for="(contra, index) of contratype.children">
-                                                        {{ attr(contra, 'name') }}<template v-if="(index+1) != contratype.children.length">,</template>
-                                                </template>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </td>    
-                        </tr>
-                    <!--<tr>
-                        <td><b>{{labels['dsa.portal.tool.lexicon.category']}}</b></td>
-                        <td>{{item.node.getAttribute('inc')}}&nbsp;
-                            <b v-if="item.node.getAttribute('usage') === 'distance'">({{labels['dsa.portal.tool.lexicon.result.talent.melee']}})</b>
-                            <b v-if="item.node.getAttribute('type') === 'base'">({{labels['dsa.portal.tool.lexicon.result.talent.base']}})</b>
+                        <td><b>{{ attr(contras, 'name') }}</b></td>
+                        <td>
+                            <table class="table is-hoverable">
+                                <tbody>
+                                    <tr v-for="contratype of contras.children">
+                                        <td><b>{{labels[`dsa.portal.tool.lexicon.result.breed.protype.${contratype.tagName}`]}}</b></td>
+                                        <td>
+                                            <template v-for="(contra, index) of contratype.children">
+                                                    {{ attr(contra, 'name') }}<template v-if="(index+1) != contratype.children.length">,</template>
+                                                    <template v-if="contra.children.length > 0">
+                                                            (
+                                                                <template v-for="(contraopt, index) of contra.children">
+                                                                    {{ attr(contraopt, 'name') }}<template v-if="(index+1) != contra.children.length">,</template>
+                                                                </template>
+                                                            )
+                                                    </template>  
+                                            </template>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>    
+                    </tr>
+                    <tr v-for="cultures of get(item.node, 'cultures')"> 
+                        <td><b>{{labels['dsa.portal.tool.lexicon.category.cultures']}}</b></td>
+                        <td>
+                            <table class="table is-hoverable">
+                                <tbody>
+                                    <tr v-for="culturetype of cultures.children">
+                                        <td><b>{{labels[`dsa.portal.tool.lexicon.result.breed.culture.${culturetype.tagName}`]}}</b></td>
+                                        <td>
+                                            <template v-for="(culture, index) of culturetype.children">
+                                                    {{ attr(culture, 'name') }}<template v-if="(index+1) != culturetype.children.length">,</template>
+                                            </template>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>    
+                    </tr>
+                    <tr v-for="specials of get(item.node, 'specialabilities')">
+                        <td><b>{{labels['dsa.portal.tool.lexicon.result.breed.specialability']}}</b></td>
+                        <td>
+                            <template v-for="(special, index) of specials.children">
+                                <template v-if="special.children.length === 0">
+                                    {{ attr(special, 'name') }}<template v-if="(index+1) != specials.children.length">,</template>
+                                </template>
+                                <template v-else>
+                                    <br/><b>{{labels['dsa.portal.tool.lexicon.result.breed.cheaper']}}</b>:<br/>
+                                    <template v-for="(specialcheap, index) of special.children">
+                                        {{ attr(specialcheap, 'name') }}<template v-if="(index+1) != specials.children.length">,</template>
+                                    </template>
+                                </template>
+                            </template>
                         </td>
                     </tr>
-                    <tr v-if="item.node.getAttribute('test')">
-                        <td><b>{{labels['dsa.portal.tool.lexicon.result.talent.test']}}</b></td>
-                        <td>{{item.node.getAttribute('test')}}</td>
-                    </tr>-->
                 </tbody>
         </table>
 </div>
