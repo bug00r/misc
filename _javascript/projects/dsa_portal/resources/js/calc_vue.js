@@ -5,9 +5,10 @@ dsa.tools.calc.vue = {
     tawcols : ["A*", "A", "B", "C", "D", "E", "F", "G", "H"],
     tawcolobj : {},
     taw: { min: -3, max: 31},
-    selected: { col: 0, min: -3, max: -3, talent:""},
+    selected: { col: 0, min: -3, max: -3, talent: -1},
     coloffset : 3,
     talents: [],
+    notepad : [],
     tawvalues: [
       5,    5,    10,   15,    20,    25,    40,    50,   100,
       5,    5,    10,   15,    20,    25,    40,    50,   100,
@@ -46,37 +47,76 @@ dsa.tools.calc.vue = {
       48,   50,   100,  150,   200,   250,   375,   500,   1000
     ]
   },
-  mounted: function() {
+  beforeMount: function() {
     this.talents = dsa.resources.xml.talents.querySelectorAll('talent')
-    
+    console.log("talents added");
     for ( const [i, value] of this.tawcols.entries() ) {
       this.tawcolobj[value] = i;
     }
   },
+  mounted: function() {
+    $("#toolnavbtn").click(function(event) {
+      $("#toolnav").toggleClass("is-active");
+    });     
+  },
   methods: {
+    calcTawRaw: function(item) {
+      let _min = Math.max(Number(item.min), this.taw.min);
+      let _max = Math.min(Number(item.max), this.taw.max);
+      let range = _max - _min;
+      let add = ( range < 0 ? -1 : 1 );
+      let result = 0;
+      let selectedcol = Number(item.col);
+
+      for (let cur = (_min + 1); cur <= _max; cur += add) {
+        
+        result += this.tawvalues[((cur + this.coloffset) * 9) + selectedcol];;
+
+      }
+
+      return result;
+    },
     calcTaw: function() {
+        
         let _min = Math.max(Number(this.selected.min), this.taw.min);
         let _max = Math.min(Number(this.selected.max), this.taw.max);
-        let range = _max - _min;
-        let add = ( range < 0 ? -1 : 1 );
-        let result = 0;
-        let selectedcol = Number(this.selected.col);
 
-        for (let cur = (_min + 1); cur <= _max; cur += add) {
-          
-          result += this.tawvalues[((cur + this.coloffset) * 9) + selectedcol];;
+        let selectedcol = Number(this.selected.col);      
 
-        }
-
-        return result;
+        return this.calcTawRaw({ min: _min, max: _max, col: selectedcol});
     },
     selectCategory: function() {
-      this.selected.talent = "-1";
+      this.selected.talent = -1;
     },
     selectTalent : function(event) {
       let index = $(event.target).val();
       let category = this.talents[index].getAttribute('inc');
       this.selected.col = this.tawcolobj[category];
+    },
+    notepadSummary: function() {
+      let result = 0;
+
+      for ( item of this.notepad ) {
+        result += this.calcTawRaw(item);
+      }
+
+      return result;
+    },
+    calcItem: function(item) {
+      return this.calcTawRaw(item);
+    },
+    removeNotepadItem: function(index) {
+      this.notepad.splice( index, 1 );
+    },
+    addNotepadItem: function() {
+      let min = Number(this.selected.min);
+      let max = Number(this.selected.max);
+
+      let col = Number(this.selected.col);
+      let talent = Number(this.selected.talent);
+
+      this.notepad.push({ min, max, col, talent });
+
     }
   }
 }

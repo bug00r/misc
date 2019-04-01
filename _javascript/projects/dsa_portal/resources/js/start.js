@@ -15,6 +15,7 @@ const dsa_portal = new Vue({
 
       });
       
+      document.title = this.labels["dsa.portal.title"];
     },
     methods: {
       open: function(tool) {

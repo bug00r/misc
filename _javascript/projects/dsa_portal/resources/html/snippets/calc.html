@@ -58,7 +58,77 @@
                    
                 </div>
             </div>
+            <div class="column">
+                <div class="field">
+                    <label class="label">&nbsp;</label>
+                    
+                    <div class="control">
+                        <a class="button" @click="addNotepadItem" >{{ labels["dsa.portal.tool.calc.addnotepad"] }}</a>
+                    </div>
+                    
+                </div>
+            </div>
         </div>
     </form>
     </div>
+
+    <div class="toolnav">
+            <div id="toolnav" class="dropdown is-up is-right">
+                <div class="dropdown-trigger">
+                    <button id="toolnavbtn" class="button is-rounded is-link" aria-haspopup="true" aria-controls="dropdown-menu2">
+                    <span>+</span>
+                    </button>
+                </div>
+                <div class="dropdown-menu is-full" id="dropdown-menu2" role="menu">
+                    <div class="dropdown-content">
+                        <div class="panel">
+                            <p class="panel-heading">
+                                {{ labels["dsa.portal.tool.calc.notepad"] }}
+                            </p>
+                            <div class="panel-block">
+                                <table class="table is-hoverable">
+                                    <thead>
+                                        <th></th>
+                                        <th><abbr :title="labels['dsa.portal.tool.lexicon.result.name']">{{labels['dsa.portal.tool.lexicon.result.name']}}</abbr></th>
+                                        <th><abbr :title="labels['dsa.portal.tool.calc.from']">{{labels['dsa.portal.tool.calc.from']}}</abbr></th>
+                                        <th><abbr :title="labels['dsa.portal.tool.calc.to']">{{labels['dsa.portal.tool.calc.to']}}</abbr></th>
+                                    </thead>
+                                    <tfoot>
+                                        <th></th>
+                                        <th><abbr :title="labels['dsa.portal.tool.lexicon.result.name']">{{labels['dsa.portal.tool.lexicon.result.name']}}</abbr></th>
+                                        <th><abbr :title="labels['dsa.portal.tool.calc.from']">{{labels['dsa.portal.tool.calc.from']}}</abbr></th>
+                                        <th><abbr :title="labels['dsa.portal.tool.calc.to']">{{labels['dsa.portal.tool.calc.to']}}</abbr></th>
+                                    </tfoot>
+                                    <tbody>
+                                        <tr v-for="(item, index) in notepad">
+                                            <th><button @click="removeNotepadItem(index)">-</button></th>
+                                            <td :data-index="index"><a :data-index="index" >
+                                                <template v-if="item.talent === -1 ">
+                                                    {{ tawcols[item.col] }}
+                                                </template>
+                                                <template v-else>
+                                                    {{ talents[item.talent].getAttribute('name') }}&nbsp;({{ talents[item.talent].getAttribute('inc') }})
+                                                </template>
+                                            </td>
+                                            <td>
+                                                <input value="23" class="input notepadnumber" v-model="item.min" type="number" name="tawmin" v-bind:min="taw.min" v-bind:max="taw.max" size="3" />
+                                            </td>
+                                            <td>
+                                                <input value="23" class="input notepadnumber" v-model="item.max" type="number" name="tawmin" v-bind:min="taw.min" v-bind:max="taw.max" size="3" />
+                                            </td>
+                                            <td><b>{{ calcItem(item) }}</b>&nbsp;{{labels["dsa.portal.tool.calc.ap"]}}</td> 
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4">{{ labels["dsa.portal.tool.calc.summary"] }}:</td>
+                                            <td><b>{{ notepadSummary() }}</b>&nbsp;{{labels["dsa.portal.tool.calc.ap"]}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 </div>

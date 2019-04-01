@@ -11,11 +11,9 @@ dsa.resources.html = dsa.resources.html || {
     "default": "default.html"
 };
 
-dsa.resources.html.calc = Base64.decode(dsa.resources.html.calc);
-dsa.resources.html.lexicon = Base64.decode(dsa.resources.html.lexicon);
-dsa.resources.html.eq = Base64.decode(dsa.resources.html.eq);
-dsa.resources.html.talent = Base64.decode(dsa.resources.html.talent);
-dsa.resources.html.breed = Base64.decode(dsa.resources.html.breed);
+for(let htmlentry in dsa.resources.html) {
+   dsa.resources.html[htmlentry] = Base64.decode(dsa.resources.html[htmlentry]);
+}
 
 dsa.resources.xml = dsa.resources.xml || {
     "armor" : "armor.xml",
@@ -34,17 +32,6 @@ dsa.resources.xml = dsa.resources.xml || {
     "weapons" : "weapons.xml"
 };
 
-dsa.resources.xml.armor = new DOMParser().parseFromString(Base64.decode(dsa.resources.xml.armor), "application/xml");
-dsa.resources.xml.basehero = new DOMParser().parseFromString(Base64.decode(dsa.resources.xml.basehero), "application/xml");
-dsa.resources.xml.breeds = new DOMParser().parseFromString(Base64.decode(dsa.resources.xml.breeds), "application/xml");
-dsa.resources.xml.creatures = new DOMParser().parseFromString(Base64.decode(dsa.resources.xml.creatures), "application/xml");
-dsa.resources.xml.cultures = new DOMParser().parseFromString(Base64.decode(dsa.resources.xml.cultures), "application/xml");
-dsa.resources.xml.equipments = new DOMParser().parseFromString(Base64.decode(dsa.resources.xml.equipments), "application/xml");
-dsa.resources.xml.procontra = new DOMParser().parseFromString(Base64.decode(dsa.resources.xml.procontra), "application/xml");
-dsa.resources.xml.professions = new DOMParser().parseFromString(Base64.decode(dsa.resources.xml.professions), "application/xml");
-dsa.resources.xml.specialabilities = new DOMParser().parseFromString(Base64.decode(dsa.resources.xml.specialabilities), "application/xml");
-dsa.resources.xml.spells = new DOMParser().parseFromString(Base64.decode(dsa.resources.xml.spells), "application/xml");
-dsa.resources.xml.talents = new DOMParser().parseFromString(Base64.decode(dsa.resources.xml.talents), "application/xml");
-dsa.resources.xml.herbs = new DOMParser().parseFromString(Base64.decode(dsa.resources.xml.herbs), "application/xml");
-dsa.resources.xml.towns = new DOMParser().parseFromString(Base64.decode(dsa.resources.xml.towns), "application/xml");
-dsa.resources.xml.weapons = new DOMParser().parseFromString(Base64.decode(dsa.resources.xml.weapons), "application/xml");
+for(let xmlentry in dsa.resources.xml) {
+    dsa.resources.xml[xmlentry] = new DOMParser().parseFromString(Base64.decode(dsa.resources.xml[xmlentry]), "application/xml");
+ }

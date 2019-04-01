@@ -52,7 +52,7 @@
                     <tbody>
                         <tr v-for="(item, index) in result">
                             <th>{{index + 1}}</th>
-                            <td @click="selectResult" :data-index="index"><a @click="selectResult" :data-index="index" href="#" >{{ item.name }}
+                            <td @click="selectResult" :data-index="index"><a @click="selectResult" :data-index="index" >{{ item.name }}
                                 <b @click="selectResult" :data-index="index" v-if="selected.category === 'all'">({{ labels[`dsa.portal.tool.lexicon.category.${item.category}`] }})</b></a>
                             </td>
                         </tr>

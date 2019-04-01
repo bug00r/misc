@@ -1,7 +1,13 @@
-#logo {
-    max-height: 5rem;
-}
-
 .modalcuttitle {
     flex-shrink: 1;
+}
+
+.toolnav {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+.notepadnumber.input[type="number"] {
+    width:60px;
 }
