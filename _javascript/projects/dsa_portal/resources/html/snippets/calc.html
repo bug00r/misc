@@ -68,6 +68,16 @@
                     
                 </div>
             </div>
+            <div class="column">
+                <div class="field">
+                    <label class="label">&nbsp;</label>
+                    
+                    <div class="control">
+                        <a class="button" @click="openPossibilities" >{{ labels["dsa.portal.tool.calc.possibilities"] }}</a>
+                    </div>
+                    
+                </div>
+            </div>
         </div>
     </form>
     </div>
@@ -106,7 +116,7 @@
                                     </tfoot>
                                     <tbody>
                                         <tr v-for="(item, index) in notepad">
-                                            <th><button @click="removeNotepadItem(index)" class="button is-small">-</button></th>
+                                            <th><a @click="removeNotepadItem(index)" class="button is-small">-</a></th>
                                             <td :data-index="index"><a :data-index="index" >
                                                 <template v-if="item.talent === -1 ">
                                                     {{ tawcols[item.col] }}
@@ -116,10 +126,10 @@
                                                 </template>
                                             </td>
                                             <td>
-                                                <input value="23" class="input notepadnumber is-small" v-model="item.min" type="number" name="tawmin" v-bind:min="taw.min" v-bind:max="taw.max" size="3" />
+                                                <input class="input notepadnumber is-small" v-model="item.min" type="number" name="tawmin" v-bind:min="taw.min" v-bind:max="taw.max" size="3" />
                                             </td>
                                             <td>
-                                                <input value="23" class="input notepadnumber is-small" v-model="item.max" type="number" name="tawmin" v-bind:min="taw.min" v-bind:max="taw.max" size="3" />
+                                                <input class="input notepadnumber is-small" v-model="item.max" type="number" name="tawmin" v-bind:min="taw.min" v-bind:max="taw.max" size="3" />
                                             </td>
                                             <td><b>{{ calcItem(item) }}</b></td> 
                                         </tr>
@@ -134,6 +144,38 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <div class="modal is-clipped" v-bind:class="{ 'is-active' : possibilities.visible }">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+                <header class="modal-card-head">
+                <div class="modal-card-title modalcuttitle">{{ labels["dsa.portal.tool.calc.possibilities"] }}</div>
+                <button @click="closePossibilities" class="delete" aria-label="close"></button>
+                </header>
+                <section class="modal-card-body">
+                        <input value="23" class="input " v-model="possibilities.ap" type="number" name="ap" v-bind:min="possibilities.min" v-bind:max="possibilities.max" />
+                        <button class="button" @click="calcPossibilities" >{{ "calculate" }}</button>
+                        <table class="table is-hoverable">
+                            <thead>
+                                <th></th>
+                                <th></th>
+                            </thead>
+                            <tfoot>
+                                <th></th>
+                                <th></th>
+                            </tfoot>
+                            <tbody>
+                                <tr v-for="(item, index) in possibilities.result">
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                </section>
+                <footer class="modal-card-foot">
+                </footer>
             </div>
         </div>
 

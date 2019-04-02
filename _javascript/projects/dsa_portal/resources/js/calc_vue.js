@@ -9,6 +9,7 @@ dsa.tools.calc.vue = {
     coloffset : 3,
     talents: [],
     notepad : [],
+    possibilities: { min: 1, max: 2000, visible: false, ap: 0, result: {}},
     tawvalues: [
       5,    5,    10,   15,    20,    25,    40,    50,   100,
       5,    5,    10,   15,    20,    25,    40,    50,   100,
@@ -70,7 +71,7 @@ dsa.tools.calc.vue = {
 
       for (let cur = (_min + 1); cur <= _max; cur += add) {
         
-        result += this.tawvalues[((cur + this.coloffset) * 9) + selectedcol];;
+        result += this.tawvalues[((cur + this.coloffset) * 9) + selectedcol];
 
       }
 
@@ -117,6 +118,32 @@ dsa.tools.calc.vue = {
 
       this.notepad.push({ min, max, col, talent });
 
+    },
+    closePossibilities: function() {
+      this.possibilities.visible = false;
+    },
+    openPossibilities: function() {
+      this.possibilities.visible = true;
+    },
+    calcPossibilities: function() {
+      let min = Number(this.possibilities.min);
+      let max = Number(this.possibilities.max);
+      let ap = Number(this.possibilities.ap);
+      let offset = -3;
+      let level_counter_max = 34;
+
+      for ( const [i, category] of this.tawcols.entries() ) {
+        
+        let level_counter = 0;
+        for (let basis = (min + 1); basis <= level_counter_max; basis += 1) {
+          let level_basis = basis;
+          for (let cur = level_basis; cur <= level_counter_max; cur += 1) {
+          
+            result += this.tawvalues[((cur + this.coloffset) * 9) + selectedcol];;
+    
+          }
+        }
+      }
     }
   }
 }
