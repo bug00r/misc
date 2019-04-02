@@ -80,7 +80,7 @@
                     </button>
                 </div>
                 <div class="dropdown-menu" id="dropdown-menu2" role="menu">
-                    <div class="dropdown-content">
+                    <div class="dropdown-content is-size-7-mobile is-marginless is-paddingless">
                         <div class="dropdown-item">
                             <p class="panel-heading">
                                 {{ labels["dsa.portal.tool.calc.notepad"] }}
@@ -95,16 +95,18 @@
                                         <th><abbr :title="labels['dsa.portal.tool.lexicon.result.name']">{{labels['dsa.portal.tool.lexicon.result.name']}}</abbr></th>
                                         <th><abbr :title="labels['dsa.portal.tool.calc.from']">{{labels['dsa.portal.tool.calc.from']}}</abbr></th>
                                         <th><abbr :title="labels['dsa.portal.tool.calc.to']">{{labels['dsa.portal.tool.calc.to']}}</abbr></th>
+                                        <th>{{labels["dsa.portal.tool.calc.ap"]}}</th>
                                     </thead>
                                     <tfoot>
                                         <th></th>
                                         <th><abbr :title="labels['dsa.portal.tool.lexicon.result.name']">{{labels['dsa.portal.tool.lexicon.result.name']}}</abbr></th>
                                         <th><abbr :title="labels['dsa.portal.tool.calc.from']">{{labels['dsa.portal.tool.calc.from']}}</abbr></th>
                                         <th><abbr :title="labels['dsa.portal.tool.calc.to']">{{labels['dsa.portal.tool.calc.to']}}</abbr></th>
+                                        <th>{{labels["dsa.portal.tool.calc.ap"]}}</th>
                                     </tfoot>
                                     <tbody>
                                         <tr v-for="(item, index) in notepad">
-                                            <th><button @click="removeNotepadItem(index)">-</button></th>
+                                            <th><button @click="removeNotepadItem(index)" class="button is-small">-</button></th>
                                             <td :data-index="index"><a :data-index="index" >
                                                 <template v-if="item.talent === -1 ">
                                                     {{ tawcols[item.col] }}
@@ -114,12 +116,12 @@
                                                 </template>
                                             </td>
                                             <td>
-                                                <input value="23" class="input notepadnumber" v-model="item.min" type="number" name="tawmin" v-bind:min="taw.min" v-bind:max="taw.max" size="3" />
+                                                <input value="23" class="input notepadnumber is-small" v-model="item.min" type="number" name="tawmin" v-bind:min="taw.min" v-bind:max="taw.max" size="3" />
                                             </td>
                                             <td>
-                                                <input value="23" class="input notepadnumber" v-model="item.max" type="number" name="tawmin" v-bind:min="taw.min" v-bind:max="taw.max" size="3" />
+                                                <input value="23" class="input notepadnumber is-small" v-model="item.max" type="number" name="tawmin" v-bind:min="taw.min" v-bind:max="taw.max" size="3" />
                                             </td>
-                                            <td><b>{{ calcItem(item) }}</b>&nbsp;{{labels["dsa.portal.tool.calc.ap"]}}</td> 
+                                            <td><b>{{ calcItem(item) }}</b></td> 
                                         </tr>
                                     </tbody>
                                 </table>
