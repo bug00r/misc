@@ -79,12 +79,15 @@
                     <span>+</span>
                     </button>
                 </div>
-                <div class="dropdown-menu is-full" id="dropdown-menu2" role="menu">
+                <div class="dropdown-menu" id="dropdown-menu2" role="menu">
                     <div class="dropdown-content">
-                        <div class="panel">
+                        <div class="dropdown-item">
                             <p class="panel-heading">
                                 {{ labels["dsa.portal.tool.calc.notepad"] }}
                             </p>
+                        </div>
+                        <hr class="dropdown-divider">
+                        <div class="dropdown-item notepadbody is-paddingless is-marginless">
                             <div class="panel-block">
                                 <table class="table is-hoverable">
                                     <thead>
@@ -118,13 +121,14 @@
                                             </td>
                                             <td><b>{{ calcItem(item) }}</b>&nbsp;{{labels["dsa.portal.tool.calc.ap"]}}</td> 
                                         </tr>
-                                        <tr>
-                                            <td colspan="4">{{ labels["dsa.portal.tool.calc.summary"] }}:</td>
-                                            <td><b>{{ notepadSummary() }}</b>&nbsp;{{labels["dsa.portal.tool.calc.ap"]}}</td>
-                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
+                        </div>
+                        <hr class="dropdown-divider">
+                        <div class="dropdown-item notepadbody">
+                            <span>{{ labels["dsa.portal.tool.calc.summary"] }}:</span>
+                            <b>{{ notepadSummary() }}</b>&nbsp;{{labels["dsa.portal.tool.calc.ap"]}}
                         </div>
                     </div>
                 </div>
