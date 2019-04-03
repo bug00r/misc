@@ -156,6 +156,7 @@
                 </header>
                 <section class="modal-card-body">
                         <input value="23" class="input " v-model="possibilities.ap" type="number" name="ap" v-bind:min="possibilities.min" v-bind:max="possibilities.max" />
+                        <label class="checkbox"><input v-model="possibilities.allowedrest" type="checkbox">with rest</label>
                         <button class="button" @click="calcPossibilities" >{{ "calculate" }}</button>
                         <table class="table is-hoverable">
                             <thead>
@@ -167,9 +168,18 @@
                                 <th></th>
                             </tfoot>
                             <tbody>
-                                <tr v-for="(item, index) in possibilities.result">
-                                    <td></td>
-                                    <td></td>
+                                <tr v-for="(item, index) of possibilities.result" v-if="item.length > 0">
+                                    <td>{{ tawcols[index] }}</td>
+                                    <td>
+                                        <table class="table is-hoverable">
+                                            <tbody>
+                                                <tr v-for="(result, indexres) of item">
+                                                    <td>[{{result.from}} - {{result.to}}]: AP's: {{result.ap}} rest: {{result.rest}}</td>
+                                                    <!-- {from: level_basis, to: cur + offset, ap: result, rest: Math.max(result, ap) % Math.min(result, ap)} -->
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
