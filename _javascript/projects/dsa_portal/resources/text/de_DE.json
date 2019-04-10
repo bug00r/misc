@@ -53,6 +53,7 @@
         "dsa.portal.tool.lexicon.result.breed.culture.common" : "Üblich",
         "dsa.portal.tool.lexicon.result.breed.culture.possible" : "Möglich",
         "dsa.portal.tool.lexicon.result.breed.specialability" : "Sonderfertigkeiten",
-        "dsa.portal.tool.lexicon.result.breed.cheaper" : "Verbilligt"
+        "dsa.portal.tool.lexicon.result.breed.cheaper" : "Verbilligt",
+        "dsa.portal.tool.hgen.name":"Helden Akademie"
     }
 }

@@ -5,6 +5,7 @@ dsa.resources.text = dsa.resources.text || "text_resource";
 dsa.resources.html = dsa.resources.html || {
     "calc" : "calc.html",
     "lexicon" : "lexicon.html",
+    "hgen" : "hgen.html",
     "eq" : "eq.html",
     "talent" : "talent.html",
     "breed" : "breed.html",
