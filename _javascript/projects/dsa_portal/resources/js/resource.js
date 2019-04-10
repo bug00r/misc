@@ -1,4 +1,4 @@
-var dsa = dsa || {};
+let dsa = {};
 dsa.resources = dsa.resources || {};
 
 dsa.resources.text = dsa.resources.text || "text_resource";
@@ -11,7 +11,7 @@ dsa.resources.html = dsa.resources.html || {
     "default": "default.html"
 };
 
-for(let htmlentry in dsa.resources.html) {
+for(const htmlentry in dsa.resources.html) {
    dsa.resources.html[htmlentry] = Base64.decode(dsa.resources.html[htmlentry]);
 }
 
@@ -32,6 +32,6 @@ dsa.resources.xml = dsa.resources.xml || {
     "weapons" : "weapons.xml"
 };
 
-for(let xmlentry in dsa.resources.xml) {
+for(const xmlentry in dsa.resources.xml) {
     dsa.resources.xml[xmlentry] = new DOMParser().parseFromString(Base64.decode(dsa.resources.xml[xmlentry]), "application/xml");
  }

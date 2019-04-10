@@ -15,6 +15,8 @@
         "dsa.portal.tool.calc.notepad" : "Taw Merkliste",
         "dsa.portal.tool.calc.summary": "Gesamt Taw AP",
         "dsa.portal.tool.calc.possibilities" : "Möglichkeiten",
+        "dsa.portal.tool.calc.possibilities.rest" : "Rest",
+        "dsa.portal.tool.calc.possibilities.calculate" : "berechnen",
         "dsa.portal.tool.lexicon.all":"-- Alle Einträge --",
         "dsa.portal.tool.lexicon.category.armor":"Rüstungen",
         "dsa.portal.tool.lexicon.category.basehero":"Basisheld",

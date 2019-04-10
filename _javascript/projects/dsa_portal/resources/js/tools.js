@@ -1,5 +1,4 @@
-var dsa = dsa || {};
-dsa.tools = dsa.tools || {};
+dsa.tools = {};
 
 dsa.tools.lexicon = {
     "id" : "lexicon",
