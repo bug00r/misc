@@ -1,3 +1,4 @@
+
 dsa.tools.hgen.vue = {
   el: '#dsa_portal_hgen',
   data: {

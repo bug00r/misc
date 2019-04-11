@@ -1,4 +1,4 @@
-let dsa = {};
+const dsa = {};
 dsa.resources = dsa.resources || {};
 
 dsa.resources.text = dsa.resources.text || "text_resource";
