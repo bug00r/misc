@@ -54,6 +54,11 @@
         "dsa.portal.tool.lexicon.result.breed.culture.possible" : "Möglich",
         "dsa.portal.tool.lexicon.result.breed.specialability" : "Sonderfertigkeiten",
         "dsa.portal.tool.lexicon.result.breed.cheaper" : "Verbilligt",
-        "dsa.portal.tool.hgen.name":"Helden Akademie"
+        "dsa.portal.tool.hgen.name":"Helden Akademie",
+        "dsa.portal.tool.hgen.noname":"unknown",
+        "dsa.portal.tool.hgen.choosehero":"Held auswählen",
+        "dsa.portal.tool.hgen.addnewhero":"Neuer Held",
+        "dsa.portal.tool.hgen.removehero":"Held löschen",
+        "dsa.portal.tool.hgen.name.placeholder":"Enter Name"
     }
 }

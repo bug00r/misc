@@ -1,49 +1,85 @@
 <div id="dsa_portal_hgen">
     <div class="container is-mobile">
-            <div class="tile is-ancestor">
-                    <div class="tile is-vertical is-8">
-                      <div class="tile">
-                        <div class="tile is-parent is-vertical">
-                          <article class="tile is-child notification is-primary">
-                            <p class="title">Vertical...</p>
-                            <p class="subtitle">Top tile</p>
-                          </article>
-                          <article class="tile is-child notification is-warning">
-                            <p class="title">...tiles</p>
-                            <p class="subtitle">Bottom tile</p>
-                          </article>
-                        </div>
-                        <div class="tile is-parent">
-                          <article class="tile is-child notification is-info">
-                            <p class="title">Middle tile</p>
-                            <p class="subtitle">With an image</p>
-                            <figure class="image is-4by3">
-                              <img src="https://bulma.io/images/placeholders/640x480.png">
-                            </figure>
-                          </article>
-                        </div>
-                      </div>
-                      <div class="tile is-parent">
-                        <article class="tile is-child notification is-danger">
-                          <p class="title">Wide tile</p>
-                          <p class="subtitle">Aligned with the right tile</p>
-                          <div class="content">
-                            <!-- Content -->
-                          </div>
-                        </article>
-                      </div>
+
+            <div class="panel">
+                <p class="panel-heading">
+                    Heros
+                </p>
+                <div class="panel-block">
+                        <div class="control select">
+                                <select @change="selectHero" v-model="currentheroid" class="input" name="selhero">
+                                    <option value="-1" disabled>{{labels['dsa.portal.tool.hgen.choosehero']}}</option>
+                                    <option v-for="(hero, index) of heros.children" v-bind:value="hero.id">  
+                                        {{getHeroNameByIndex(index)}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="control">
+                                <a class="button" @click="addNewHero" >{{ labels["dsa.portal.tool.hgen.addnewhero"] }}</a>
+                            </div>
+                            <div class="control">
+                                <a class="button" @click="removeHero" :disabled="currenthero === null" >{{ labels["dsa.portal.tool.hgen.removehero"] }}</a>
+                            </div>
+                </div>
+                <template v-if="currenthero">
+                    <div class="panel-block">
+                            <p>selected hero: {{ currenthero.getAttributeNode('name').value }} - {{ currenthero.getAttributeNode('id').value }}</p>
                     </div>
-                    <div class="tile is-parent">
-                      <article class="tile is-child notification is-success">
-                        <div class="content">
-                          <p class="title">Tall tile</p>
-                          <p class="subtitle">With even more content</p>
-                          <div class="content">
-                            <!-- Content -->
-                          </div>
-                        </div>
-                      </article>
+                    <div class="panel-block">
+                        
+                        <div class="tile is-ancestor">
+                                <div class="tile is-vertical is-8">
+                                  <div class="tile">
+                                    <div class="tile is-parent is-vertical">
+                                            <!-- Hero name -->
+                                            <div class="field is-horizontal is-child">
+                                                <div class="field-label is-normal is-left">
+                                                    <label class="label">Name:</label>
+                                                </div>
+                                                <div class="field-body">
+                                                    <div class="field">
+                                                        <input @keyup.enter="refreshHerolistEntry" v-model="currenthero.getAttributeNode('name').value" class="input" type="text" :placeholder="labels['dsa.portal.tool.hgen.name.placeholder']">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- // Hero name -->
+                                    </div>
+                                    <div class="tile is-parent">
+                                      <article class="tile is-child notification is-info">
+                                        <p class="title">Middle tile</p>
+                                        <p class="subtitle">With an image</p>
+                                        <figure class="image is-4by3">
+                                          <img src="https://bulma.io/images/placeholders/640x480.png">
+                                        </figure>
+                                      </article>
+                                    </div>
+                                  </div>
+                                  <div class="tile is-parent">
+                                                        <article class="tile is-child notification is-danger">
+                                      <p class="title">Wide tile</p>
+                                      <p class="subtitle">Aligned with the right tile</p>
+                                      <div class="content">
+                                        <!-- Content -->
+                                      </div>
+                                    </article>
+                                  </div>
+                                </div>
+                                <div class="tile is-parent">
+                                  <article class="tile is-child notification is-success">
+                                    <div class="content">
+                                      <p class="title">Tall tile</p>
+                                      <p class="subtitle">With even more content</p>
+                                      <div class="content">
+                                        <!-- Content -->
+                                      </div>
+                                    </div>
+                                  </article>
+                                </div>
+                              </div>
+
+
                     </div>
-                  </div>
+                </template>
+            </div>
     </div>
 </div>
