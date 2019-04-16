@@ -6,20 +6,28 @@
                     Heros
                 </p>
                 <div class="panel-block">
+                        <!-- Hero Akademie Menue -->
+                        <!-- Hero List -->
                         <div class="control select">
-                                <select @change="selectHero" v-model="currentheroid" class="input" name="selhero">
-                                    <option value="-1" disabled>{{labels['dsa.portal.tool.hgen.choosehero']}}</option>
-                                    <option v-for="(hero, index) of heros.children" v-bind:value="hero.id">  
-                                        {{getHeroNameByIndex(index)}}
-                                    </option>
-                                </select>
-                            </div>
-                            <div class="control">
-                                <a class="button" @click="addNewHero" >{{ labels["dsa.portal.tool.hgen.addnewhero"] }}</a>
-                            </div>
-                            <div class="control">
-                                <a class="button" @click="removeHero" :disabled="currenthero === null" >{{ labels["dsa.portal.tool.hgen.removehero"] }}</a>
-                            </div>
+                            <select @change="selectHero" v-model="currentheroid" class="input" name="selhero">
+                                <option value="-1" disabled>{{labels['dsa.portal.tool.hgen.choosehero']}}</option>
+                                <option v-for="(hero, index) of heros.children" v-bind:value="hero.id">  
+                                    {{getHeroNameByIndex(index)}}
+                                </option>
+                            </select>
+                        </div>
+                        <!-- // Hero List -->
+                        <!-- ADD new Hero -->
+                        <div class="control">
+                            <a class="button" @click="addNewHero" >{{ labels["dsa.portal.tool.hgen.addnewhero"] }}</a>
+                        </div>
+                        <!-- // ADD new Hero -->
+                        <!-- DELETE selected Hero -->
+                        <div class="control">
+                            <a class="button" @click="removeHero" :disabled="currenthero === null" >{{ labels["dsa.portal.tool.hgen.removehero"] }}</a>
+                        </div>
+                        <!-- //DELETE selected Hero -->
+                        <!-- // Hero Akademie Menue -->
                 </div>
                 <template v-if="currenthero">
                     <div class="panel-block">
@@ -33,7 +41,7 @@
                                     <div class="tile is-parent is-vertical">
                                             <!-- Hero name -->
                                             <div class="field is-horizontal is-child">
-                                                <div class="field-label is-normal is-left">
+                                                <div class="field-label is-normal has-text-left">
                                                     <label class="label">Name:</label>
                                                 </div>
                                                 <div class="field-body">
