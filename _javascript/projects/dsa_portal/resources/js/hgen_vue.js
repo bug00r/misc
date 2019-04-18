@@ -14,6 +14,9 @@ dsa.tools.hgen.vue = {
   mounted: function() {
      
   },
+  computed: {
+
+  },
   methods: {
     setName: function(event) {
       if ( this.currenthero !== null) {
@@ -23,9 +26,7 @@ dsa.tools.hgen.vue = {
       }
     },
     getName: function() {
-      if ( this.currenthero !== null) {
-        return this.currenthero.getAttribute('name');
-      }
+      return (this.currenthero ? this.currenthero.getAttribute('name') : "");
     },
     selectHero : function(event) {
       let id = $(event.target).val();
@@ -43,10 +44,6 @@ dsa.tools.hgen.vue = {
       this.currenthero = null;
       this.currentheroid = -1;
     },
-    refreshHerolistEntry: function() {
-      this.currentheroid = -1;
-      this.currentheroid = this.currenthero.getAttribute('id');
-    }, 
     getHeroNameByIndex: function(index) {
       let name = this.heros.children[index].getAttribute('name');
       return name ? name : this.labels['dsa.portal.tool.hgen.noname'];
