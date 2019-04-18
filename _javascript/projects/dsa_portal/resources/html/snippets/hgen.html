@@ -1,7 +1,6 @@
 <div id="dsa_portal_hgen">
     <div class="container is-mobile">
-
-            <div class="panel" v-if="somethingChanged || !somethingChanged">
+            <!--<div class="panel" v-if="somethingChanged || !somethingChanged">-->
                 <p class="panel-heading">
                     Heros
                 </p>
@@ -31,7 +30,7 @@
                 </div>
                 <template v-if="currenthero">
                     <div class="panel-block">
-                            <p>selected hero: {{ getName() }}</p>
+                            <p v-if="stateChanged('heroname')">selected hero: {{ getName() }}</p>
                     </div>
                     <div class="panel-block">
                         
@@ -147,8 +146,6 @@
                                   </article>
                                 </div>
                               </div>
-
-
                     </div>
                 </template>
             </div>

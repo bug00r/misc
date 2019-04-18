@@ -6,7 +6,13 @@ dsa.tools.hgen.vue = {
     labels: dsa.resources.text.labels,
     currenthero: null,
     currentheroid: -1,
+    state: {
+      changed: {
+        heroname: false
+      }
+    },
     somethingChanged: false,
+    newhero: null
   },
   beforeMount: function() {
 
@@ -14,15 +20,20 @@ dsa.tools.hgen.vue = {
   mounted: function() {
      
   },
-  computed: {
-
-  },
   methods: {
+    stateChanged: function(statename) {
+      const state = this.state.changed[statename];
+      return (!state || state);
+    },
+    toggleStateChanged: function(statename) {
+      this.state.changed[statename] = !this.state.changed[statename];
+    },
     setName: function(event) {
       if ( this.currenthero !== null) {
         let name = $(event.target).val();
         this.currenthero.setAttribute('name', name);
-        this.somethingChanged = !this.somethingChanged;
+        this.toggleStateChanged('heroname');
+        this.newhero.getAttributeNode('name').value = name;
       }
     },
     getName: function() {
@@ -32,6 +43,7 @@ dsa.tools.hgen.vue = {
       let id = $(event.target).val();
       if (id > 0) {
         this.currenthero = this.heros.querySelector(`hero[id='${id}']`);
+        this.newhero = this.heros.querySelector(`hero[id='${id}']`).__proto__;
       }
     },
     addNewHero : function() {
