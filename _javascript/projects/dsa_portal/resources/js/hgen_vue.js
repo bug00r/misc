@@ -6,6 +6,7 @@ dsa.tools.hgen.vue = {
     labels: dsa.resources.text.labels,
     currenthero: null,
     currentheroid: -1,
+    somethingChanged: false,
   },
   beforeMount: function() {
 
@@ -14,6 +15,18 @@ dsa.tools.hgen.vue = {
      
   },
   methods: {
+    setName: function(event) {
+      if ( this.currenthero !== null) {
+        let name = $(event.target).val();
+        this.currenthero.setAttribute('name', name);
+        this.somethingChanged = !this.somethingChanged;
+      }
+    },
+    getName: function() {
+      if ( this.currenthero !== null) {
+        return this.currenthero.getAttribute('name');
+      }
+    },
     selectHero : function(event) {
       let id = $(event.target).val();
       if (id > 0) {

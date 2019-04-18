@@ -59,6 +59,7 @@
         "dsa.portal.tool.hgen.choosehero":"Held auswählen",
         "dsa.portal.tool.hgen.addnewhero":"Neuer Held",
         "dsa.portal.tool.hgen.removehero":"Held löschen",
-        "dsa.portal.tool.hgen.name.placeholder":"Enter Name"
+        "dsa.portal.tool.hgen.name.placeholder":"Enter Name",
+        "dsa.portal.tool.hgen.change": "ändern"
     }
 }

@@ -1,7 +1,7 @@
 <div id="dsa_portal_hgen">
     <div class="container is-mobile">
 
-            <div class="panel">
+            <div class="panel" v-if="somethingChanged || !somethingChanged">
                 <p class="panel-heading">
                     Heros
                 </p>
@@ -31,7 +31,7 @@
                 </div>
                 <template v-if="currenthero">
                     <div class="panel-block">
-                            <p>selected hero: {{ currenthero.getAttributeNode('name').value }} - {{ currenthero.getAttributeNode('id').value }}</p>
+                            <p>selected hero: {{ getName() }}</p>
                     </div>
                     <div class="panel-block">
                         
@@ -46,11 +46,74 @@
                                                 </div>
                                                 <div class="field-body">
                                                     <div class="field">
-                                                        <input @keyup.enter="refreshHerolistEntry" v-model="currenthero.getAttributeNode('name').value" class="input" type="text" :placeholder="labels['dsa.portal.tool.hgen.name.placeholder']">
+                                                        <input @keyup="setName" :value="getName()" class="input" type="text" :placeholder="labels['dsa.portal.tool.hgen.name.placeholder']">  
                                                     </div>
                                                 </div>
                                             </div>
                                             <!-- // Hero name -->
+                                            <!-- Hero breed -->
+                                            <div class="field is-horizontal is-child is-fullwidth">
+                                              <div class="field-label is-normal has-text-left">
+                                                  <label class="label">Breed:</label>
+                                              </div>
+                                              <div class="field-body box is-paddingless">
+                                                  <div class="control is-expanded">                                                 
+                                                      <article class="media is-full-width">
+                                                          <figure class="media-left">
+                                                            <p class="image is-32x32">
+                                                              <img src="https://bulma.io/images/placeholders/128x128.png">
+                                                            </p>
+                                                          </figure>
+                                                          <div class="media-content is-fullwidth">
+                                                              <div class="content"><b>Mittelländer</b></div>
+                                                          </div>
+                                                      </article>                           
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          <!-- // Hero breed -->
+                                          <!-- Hero culture -->
+                                          <div class="field is-horizontal is-child is-fullwidth">
+                                              <div class="field-label is-normal has-text-left">
+                                                  <label class="label">Culture:</label>
+                                              </div>
+                                              <div class="field-body box is-paddingless">
+                                                  <div class="control is-expanded">                                                 
+                                                      <article class="media is-full-width">
+                                                          <figure class="media-left">
+                                                            <p class="image is-32x32">
+                                                              <img src="https://bulma.io/images/placeholders/128x128.png">
+                                                            </p>
+                                                          </figure>
+                                                          <div class="media-content is-fullwidth">
+                                                              <div class="content"><b>Mittelländische Stadtstaaten</b></div>
+                                                          </div>
+                                                      </article>                           
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          <!-- // Hero culture -->
+                                          <!-- Hero profession -->
+                                          <div class="field is-horizontal is-child is-fullwidth">
+                                              <div class="field-label is-normal has-text-left">
+                                                  <label class="label">Job:</label>
+                                              </div>
+                                              <div class="field-body box is-paddingless">
+                                                  <div class="control is-expanded">                                                 
+                                                      <article class="media is-full-width">
+                                                          <figure class="media-left">
+                                                            <p class="image is-32x32">
+                                                              <img src="https://bulma.io/images/placeholders/128x128.png">
+                                                            </p>
+                                                          </figure>
+                                                          <div class="media-content is-fullwidth">
+                                                              <div class="content"><b>Wundarzt</b></div>
+                                                          </div>
+                                                      </article>                           
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          <!-- // Hero profession -->
                                     </div>
                                     <div class="tile is-parent">
                                       <article class="tile is-child notification is-info">
